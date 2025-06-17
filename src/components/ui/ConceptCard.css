@@ -1,0 +1,195 @@
+@import '../../styles/variables.css';
+
+.concept-card {
+  position: relative;
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.concept-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.concept-card:focus {
+  outline: 3px solid var(--color-primary-blue-light);
+  outline-offset: 2px;
+}
+
+/* Fond liquide animé */
+.concept-card__liquid-bg {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  animation: liquid-move 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.concept-card--orange .concept-card__liquid-bg {
+  background: radial-gradient(circle at 80% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+}
+
+@keyframes liquid-move {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+/* Contenu de la carte */
+.concept-card__content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.concept-card__image,
+.concept-card__placeholder {
+  width: 100%;
+  height: 200px;
+  margin-bottom: var(--space-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-gray-100);
+}
+
+.concept-card__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%);
+}
+
+.concept-card--blue .concept-card__placeholder {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+}
+
+.concept-card--orange .concept-card__placeholder {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%);
+}
+
+.concept-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.concept-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  color: var(--color-gray-900);
+}
+
+.concept-card--blue .concept-card__title {
+  color: var(--color-primary-blue-dark);
+}
+
+.concept-card--orange .concept-card__title {
+  color: var(--color-primary-orange-dark);
+}
+
+.concept-card__description {
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+  flex: 1;
+}
+
+/* Métadonnées */
+.concept-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.difficulty {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.difficulty--beginner {
+  background: rgba(34, 197, 94, 0.1);
+  color: rgb(21, 128, 61);
+}
+
+.difficulty--intermediate {
+  background: rgba(251, 191, 36, 0.1);
+  color: rgb(180, 83, 9);
+}
+
+.difficulty--advanced {
+  background: rgba(239, 68, 68, 0.1);
+  color: rgb(185, 28, 28);
+}
+
+.time {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+}
+
+/* Effet de hover liquide */
+.concept-card__hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.1) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.concept-card--orange .concept-card__hover-effect {
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249, 115, 22, 0.1) 0%, transparent 40%);
+}
+
+.concept-card:hover .concept-card__hover-effect {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .concept-card__content {
+    padding: var(--space-sm);
+  }
+  
+  .concept-card__image,
+  .concept-card__placeholder {
+    height: 150px;
+  }
+  
+  .concept-card__title {
+    font-size: 1.1rem;
+  }
+  
+  .concept-card__description {
+    font-size: 0.9rem;
+  }
+}

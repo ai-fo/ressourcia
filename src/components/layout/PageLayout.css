@@ -1,3 +1,5 @@
+@import '../../styles/variables.css';
+
 .page-layout {
   min-height: 100vh;
   display: flex;
@@ -5,10 +7,10 @@
 }
 
 .page-header {
-  background-color: #1a1a2e;
+  background: linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-blue-light) 100%);
   color: white;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .page-header nav {
