@@ -48,7 +48,6 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
           <span className={`difficulty difficulty--${concept.difficulty}`}>
             {difficultyLabel[concept.difficulty]}
           </span>
-          <span className="time">⏱ {concept.estimatedTime}</span>
         </div>
       </div>
 
