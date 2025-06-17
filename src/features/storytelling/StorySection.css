@@ -1,0 +1,57 @@
+.story-section {
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story-title {
+  font-size: 2rem;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+}
+
+.story-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.story-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.story-fact {
+  background-color: #f0f4f8;
+  border-left: 4px solid #3498db;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+.story-fact h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.fact-source {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+  font-style: italic;
+}
