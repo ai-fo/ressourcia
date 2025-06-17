@@ -4,7 +4,7 @@
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  background: linear-gradient(to bottom, var(--color-gray-50) 0%, white 100%);
+  background: linear-gradient(to bottom, #0f172a 0%, #1e3a8a 100%);
 }
 
 /* Fond liquide animé */
@@ -15,11 +15,11 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.7;
   background: 
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 40% 60%, rgba(96, 165, 250, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 40% 60%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
   animation: liquid-bg-move 20s ease-in-out infinite;
 }
 
@@ -41,9 +41,9 @@
   z-index: 1;
   padding: var(--space-2xl) var(--space-lg);
   text-align: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(30, 64, 175, 0.2) 100%);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .home-header__content {
@@ -60,10 +60,8 @@
 
 .title-line {
   display: block;
-  background: linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-blue-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .title-line--accent {
@@ -71,11 +69,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: none;
 }
 
 .home-subtitle {
   font-size: 1.25rem;
-  color: var(--color-gray-600);
+  color: rgba(255, 255, 255, 0.8);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -93,10 +92,12 @@
 .filter-buttons {
   display: flex;
   gap: var(--space-sm);
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   padding: 0.5rem;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .filter-btn {
@@ -105,20 +106,20 @@
   background: transparent;
   border-radius: var(--radius-md);
   font-weight: 500;
-  color: var(--color-gray-600);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .filter-btn:hover {
-  color: var(--color-primary-blue);
-  background: rgba(59, 130, 246, 0.05);
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .filter-btn.active {
   color: white;
-  background: linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-blue-light) 100%);
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--color-primary-orange) 0%, var(--color-primary-orange-light) 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 /* Grille de concepts */
@@ -162,8 +163,8 @@
 .shape {
   position: absolute;
   border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.3;
+  filter: blur(60px);
+  opacity: 0.4;
 }
 
 .shape--1 {
