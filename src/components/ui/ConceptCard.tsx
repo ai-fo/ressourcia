@@ -11,9 +11,9 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
   onClick,
 }) => {
   const difficultyLabel = {
-    beginner: 'Débutant',
-    intermediate: 'Intermédiaire',
-    advanced: 'Avancé',
+    beginner: '🟢 Débutant',
+    intermediate: '🟡 Intermédiaire',
+    advanced: '🔴 Avancé',
   };
 
   return (
@@ -48,6 +48,7 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
           <span className={`difficulty difficulty--${concept.difficulty}`}>
             {difficultyLabel[concept.difficulty]}
           </span>
+          <span className="concept-card__time">⏱️ {concept.estimatedTime}</span>
         </div>
       </div>
 

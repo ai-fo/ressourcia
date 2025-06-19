@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ConceptCard } from '../components/ui/ConceptCard';
-import { aiConcepts } from '../data/concepts';
+import { aiConcepts, getConceptCountByDifficulty } from '../data/concepts';
 import './HomePage.css';
 
 export const HomePage = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
   const navigate = useNavigate();
+  const conceptCounts = getConceptCountByDifficulty();
 
   const filteredConcepts =
     selectedDifficulty === 'all'
@@ -44,25 +45,25 @@ export const HomePage = () => {
             className={`filter-btn ${selectedDifficulty === 'all' ? 'active' : ''}`}
             onClick={() => setSelectedDifficulty('all')}
           >
-            Tous les niveaux
+            Tous les niveaux ({aiConcepts.length})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'beginner' ? 'active' : ''}`}
             onClick={() => setSelectedDifficulty('beginner')}
           >
-            Débutant
+            🟢 Débutant ({conceptCounts.beginner})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'intermediate' ? 'active' : ''}`}
             onClick={() => setSelectedDifficulty('intermediate')}
           >
-            Intermédiaire
+            🟡 Intermédiaire ({conceptCounts.intermediate})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'advanced' ? 'active' : ''}`}
             onClick={() => setSelectedDifficulty('advanced')}
           >
-            Avancé
+            🔴 Avancé ({conceptCounts.advanced})
           </button>
         </div>
       </section>
