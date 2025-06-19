@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ConceptCard } from '../components/ui/ConceptCard';
 import { aiConcepts, getConceptCountByDifficulty } from '../data/concepts';
+import { useAuth } from '../contexts/AuthContext';
 import './HomePage.css';
 
 export const HomePage = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
   const navigate = useNavigate();
+  const { user } = useAuth();
   const conceptCounts = getConceptCountByDifficulty();
 
   const filteredConcepts =
@@ -25,18 +27,30 @@ export const HomePage = () => {
       <div className="home-page__liquid-bg"></div>
 
       <header className="home-header">
-        <div className="home-header__content">
-          <h1 className="home-title">
-            <span className="title-line">Découvre l'IA</span>
-            <span className="title-line title-line--accent">
-              de façon fun ! 🎨
-            </span>
-          </h1>
-          <p className="home-subtitle">
-            Apprends les concepts de l'intelligence artificielle à travers des
-            histoires illustrées et des jeux interactifs
-          </p>
-        </div>
+        <nav className="home-nav">
+          <div className="nav-brand">
+            <div className="nav-logo">Ressourcia</div>
+            <div className="nav-slogan">L'IA racontée autrement</div>
+          </div>
+          <div className="nav-links">
+            {user ? (
+              <>
+                <Link to="/profile" className="nav-link nav-link--profile">
+                  Mon profil
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-link">
+                  Se connecter
+                </Link>
+                <Link to="/register" className="nav-link nav-link--cta">
+                  S'inscrire
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
       </header>
 
       <section className="filter-section">

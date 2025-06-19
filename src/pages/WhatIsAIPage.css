@@ -526,6 +526,67 @@
   border-color: rgba(249, 115, 22, 0.4);
 }
 
+/* Section Technique */
+.technical-section {
+  margin: var(--space-2xl) auto;
+  max-width: 900px;
+  padding: var(--space-xl) var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.technical-title {
+  font-size: 2.5rem;
+  color: var(--color-primary-blue-lighter);
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  font-family: 'Baloo 2', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.technical-content {
+  background: rgba(30, 58, 138, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.tech-explanation {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+}
+
+.tech-intro {
+  font-size: 1.2rem;
+  color: var(--color-primary-orange-lighter);
+  font-style: italic;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.tech-explanation h3 {
+  color: var(--color-primary-orange-lighter);
+  font-size: 1.8rem;
+  font-family: 'Baloo 2', sans-serif;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid rgba(249, 115, 22, 0.3);
+}
+
+.tech-explanation p {
+  margin-bottom: var(--space-lg);
+  text-align: justify;
+}
+
+.tech-explanation strong {
+  color: var(--color-primary-blue-lighter);
+  font-weight: 600;
+}
+
+
 /* Responsive */
 @media (max-width: 1024px) {
   .hero-content {
@@ -769,6 +830,17 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  /* Section technique responsive */
+  .technical-content {
+    padding: var(--space-lg);
+  }
+  
+  .tech-explanation h3 {
+    font-size: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .back-home-section {
     margin: var(--space-xl) var(--space-md);
