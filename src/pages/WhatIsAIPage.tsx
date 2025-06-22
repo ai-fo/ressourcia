@@ -534,17 +534,35 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <section className="back-home-section">
           <div className="back-home-content">
-            <h3>Vous voulez découvrir d'autres concepts ?</h3>
+            <h3>🎯 Continuez votre exploration !</h3>
             <p>
-              Retournez à la page d'accueil pour explorer plus de sujets
-              passionnants sur l'IA !
+              Vous avez aimé découvrir l'IA ? Voici d'autres concepts passionnants qui vous attendent :
             </p>
+            
+            <div className="suggested-concepts">
+              <div className="suggested-card">
+                <span className="suggested-icon">🤖</span>
+                <h4>Machine Learning</h4>
+                <p>Comment les machines apprennent-elles vraiment ?</p>
+              </div>
+              <div className="suggested-card">
+                <span className="suggested-icon">🧠</span>
+                <h4>Réseaux de neurones</h4>
+                <p>Le cerveau artificiel décrypté simplement</p>
+              </div>
+              <div className="suggested-card">
+                <span className="suggested-icon">💬</span>
+                <h4>ChatGPT & LLMs</h4>
+                <p>Les secrets des IA conversationnelles</p>
+              </div>
+            </div>
+
             <button
               className="back-home-btn"
               onClick={() => (window.location.href = '/home')}
             >
-              <span className="btn-icon">🏠</span>
-              <span className="btn-text">Retour à l'accueil</span>
+              <span className="btn-icon">🚀</span>
+              <span className="btn-text">Explorer tous les concepts</span>
             </button>
           </div>
           <div className="floating-shapes-small">
