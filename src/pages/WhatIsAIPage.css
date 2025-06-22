@@ -206,16 +206,34 @@
 .interactive-section {
   margin: var(--space-lg) auto;
   max-width: 1200px;
-  position: relative;
-}
-
-.ai-detective-game {
   padding: var(--space-lg);
   background: rgba(30, 58, 138, 0.3);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-xl);
   border: 1px solid rgba(59, 130, 246, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--color-primary-blue-light) 0%, 
+    var(--color-primary-orange-light) 50%, 
+    var(--color-primary-blue-light) 100%);
+  background-size: 200% 100%;
+  animation: gradient-move 3s linear infinite;
+}
+
+.ai-detective-game {
+  position: relative;
+  z-index: 1;
 }
 
 .ai-detective-game h3 {
@@ -242,10 +260,10 @@
 }
 
 .scenario-card {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.15);
   border-radius: var(--radius-lg);
-  padding: var(--space-sm);
+  padding: var(--space-md);
   transition: all var(--transition-base);
 }
 
@@ -277,8 +295,8 @@
 
 .item-btn {
   padding: var(--space-sm) var(--space-md);
-  background: rgba(59, 130, 246, 0.1);
-  border: 2px solid rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: var(--radius-md);
   color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
