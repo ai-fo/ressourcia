@@ -203,6 +203,12 @@
 }
 
 /* Jeu interactif */
+.interactive-section {
+  margin: var(--space-lg) auto;
+  max-width: 1200px;
+  position: relative;
+}
+
 .ai-detective-game {
   padding: var(--space-lg);
   background: rgba(30, 58, 138, 0.3);
@@ -371,13 +377,16 @@
 /* Sections avec effet glassmorphism */
 .story-section,
 .explanation-section {
-  background: rgba(30, 58, 138, 0.2);
+  background: rgba(30, 58, 138, 0.3);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  margin-bottom: var(--space-md);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
   border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
+  max-width: 1200px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .story-section::before,
@@ -405,7 +414,7 @@
 .history-section {
   margin: var(--space-lg) auto;
   max-width: 1200px;
-  padding: var(--space-lg) var(--space-lg);
+  padding: var(--space-lg);
   background: rgba(30, 58, 138, 0.3);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-xl);
@@ -586,8 +595,8 @@
 /* Section Technique */
 .technical-section {
   margin: var(--space-lg) auto;
-  max-width: 900px;
-  padding: var(--space-lg) var(--space-lg);
+  max-width: 1200px;
+  padding: var(--space-lg);
   position: relative;
   z-index: 1;
 }
@@ -606,8 +615,10 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(59, 130, 246, 0.3);
   border-radius: var(--radius-xl);
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tech-explanation {
