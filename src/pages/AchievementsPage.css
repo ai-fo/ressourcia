@@ -214,6 +214,66 @@
   font-style: italic;
 }
 
+/* Section Historique */
+.history-section {
+  margin-bottom: var(--space-lg);
+  animation: fade-in 0.5s ease 0.5s both;
+}
+
+.history-section h2 {
+  color: var(--color-primary-blue-lighter);
+  margin-bottom: var(--space-md);
+  font-size: 1.8rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.achievements-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.achievement-item {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.achievement-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.achievement-points {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary-orange-lighter);
+  min-width: 80px;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.achievement-details {
+  flex: 1;
+}
+
+.achievement-reason {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.achievement-date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
 /* Next Steps */
 .next-steps {
   background: rgba(59, 130, 246, 0.2);

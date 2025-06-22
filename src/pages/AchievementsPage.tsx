@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageLayout } from '../components/layout/PageLayout';
 import { useAuth } from '../contexts/AuthContext';
 import { useGamification } from '../contexts/GamificationContext';
 import { UserStatsBar } from '../components/gamification/UserStatsBar';
 import { BadgeDisplay } from '../components/gamification/BadgeDisplay';
 import { Navigate } from 'react-router-dom';
+import { supabase } from '../services/supabase';
 import './AchievementsPage.css';
+
+interface AchievementHistory {
+  id: string;
+  points: number;
+  reason: string;
+  earned_at: string;
+}
 
 export const AchievementsPage: React.FC = () => {
   const { user } = useAuth();
   const { userStats, progress, loading } = useGamification();
+  const [achievementsHistory, setAchievementsHistory] = useState<AchievementHistory[]>([]);
+
+  useEffect(() => {
+    const fetchAchievementsHistory = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('achievements_history')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('earned_at', { ascending: false })
+        .limit(10);
+
+      if (data && !error) {
+        setAchievementsHistory(data);
+      }
+    };
+
+    fetchAchievementsHistory();
+  }, [user]);
 
   if (!user) {
     return <Navigate to="/login" />;
@@ -115,6 +143,31 @@ export const AchievementsPage: React.FC = () => {
                   Incroyable ! Continuez sur cette lancée !
                 </p>
               )}
+            </div>
+          </section>
+        )}
+
+        {achievementsHistory.length > 0 && (
+          <section className="history-section">
+            <h2>📜 Historique récent</h2>
+            <div className="achievements-history">
+              {achievementsHistory.map((achievement) => (
+                <div key={achievement.id} className="achievement-item">
+                  <div className="achievement-points">+{achievement.points}</div>
+                  <div className="achievement-details">
+                    <p className="achievement-reason">{achievement.reason}</p>
+                    <p className="achievement-date">
+                      {new Date(achievement.earned_at).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         )}

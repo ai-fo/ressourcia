@@ -33,7 +33,7 @@ interface GamificationContextType {
   userBadges: string[];
   progress: Progress[];
   loading: boolean;
-  addPoints: (points: number) => Promise<void>;
+  addPoints: (points: number, reason?: string) => Promise<void>;
   completeChapter: (
     conceptSlug: string,
     quizScore?: number,
@@ -145,13 +145,14 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
   }, [user]);
 
   // Add points to user
-  const addPoints = async (points: number) => {
+  const addPoints = async (points: number, reason?: string) => {
     if (!user || !userStats) return;
 
     const newPoints = userStats.points + points;
     const newLevel = Math.floor(newPoints / 100) + 1;
 
-    const { error } = await supabase
+    // Update user stats
+    const { error: statsError } = await supabase
       .from('user_stats')
       .update({
         points: newPoints,
@@ -160,12 +161,26 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
       })
       .eq('user_id', user.id);
 
-    if (!error) {
+    if (!statsError) {
+      // Add to achievements history if reason is provided
+      if (reason) {
+        await supabase
+          .from('achievements_history')
+          .insert({
+            user_id: user.id,
+            points: points,
+            reason: reason,
+          });
+      }
+
       setUserStats({
         ...userStats,
         points: newPoints,
         level: newLevel,
       });
+      
+      // Check and award badges after points update
+      await checkAndAwardBadges();
     }
   };
 
