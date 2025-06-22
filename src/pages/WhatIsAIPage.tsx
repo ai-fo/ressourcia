@@ -11,9 +11,14 @@ import './WhatIsAIPage.css';
 export const WhatIsAIPage = () => {
   const [userChoices, setUserChoices] = useState<string[]>([]);
   const [hasCompleted, setHasCompleted] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showQuizFeedback, setShowQuizFeedback] = useState(false);
+  const [quizScore, setQuizScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { completeChapter, progress } = useGamification();
+  const { completeChapter, progress, addPoints } = useGamification();
 
   // Check if chapter is already completed
   useEffect(() => {
@@ -115,6 +120,82 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
   const handleGameChoice = (choice: string) => {
     setUserChoices([...userChoices, choice]);
+  };
+
+  const quizQuestions = [
+    {
+      question: "Selon l'histoire d'Alice, qu'est-ce qu'ALBERT a appris à faire ?",
+      options: [
+        "Réparer des objets cassés",
+        "Retrouver le tournevis d'Alice selon ses habitudes",
+        "Ranger automatiquement l'atelier",
+        "Construire d'autres robots"
+      ],
+      correct: 1,
+      explanation: "ALBERT a appris à comprendre les habitudes d'Alice et à prédire où elle rangeait son tournevis selon le jour de la semaine."
+    },
+    {
+      question: "Quel test permet de savoir si une machine peut 'penser' ?",
+      options: [
+        "Le test de QI",
+        "Le test d'intelligence émotionnelle",
+        "Le test de Turing",
+        "Le test de performance"
+      ],
+      correct: 2,
+      explanation: "Le test de Turing, proposé en 1950, vérifie si une machine peut avoir une conversation si naturelle qu'on ne peut pas la distinguer d'un humain."
+    },
+    {
+      question: "Parmi ces éléments de votre quotidien, lequel N'utilise PAS l'IA ?",
+      options: [
+        "La correction automatique du téléphone",
+        "Les suggestions Netflix",
+        "Une calculatrice basique",
+        "Le déverrouillage facial"
+      ],
+      correct: 2,
+      explanation: "Une calculatrice basique suit des règles mathématiques fixes, elle n'apprend pas de patterns comme le fait l'IA."
+    }
+  ];
+
+  const handleQuizAnswer = (answerIndex: number) => {
+    setSelectedAnswer(answerIndex);
+    setShowQuizFeedback(true);
+    
+    if (answerIndex === quizQuestions[currentQuestion].correct) {
+      setQuizScore(prev => prev + 1);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestion < 2) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setShowQuizFeedback(false);
+    } else {
+      // Quiz terminé
+      setQuizCompleted(true);
+      
+      // Attribuer les points selon le score final
+      if (user) {
+        const finalScore = selectedAnswer === quizQuestions[currentQuestion].correct 
+          ? quizScore + 1 
+          : quizScore;
+          
+        let points = 50;
+        let reason = 'Quiz complété sur "Qu\'est-ce que l\'IA ?"';
+        
+        if (finalScore === 3) {
+          points = 200;
+          reason = 'Quiz parfait sur "Qu\'est-ce que l\'IA ?"';
+        } else if (finalScore === 2) {
+          points = 100;
+          reason = 'Quiz réussi sur "Qu\'est-ce que l\'IA ?"';
+        }
+        
+        addPoints(points, reason);
+      }
+    }
   };
 
   return (
@@ -533,6 +614,100 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
         </section>
 
         <ExplanationSection explanation={explanationContent} />
+
+        <section className="quiz-section">
+          <h3>🎯 Testez vos connaissances !</h3>
+          <p className="quiz-intro">
+            Avant de continuer, voyons ce que vous avez retenu de cette page !
+          </p>
+
+          <div className="quiz-container">
+            {!quizCompleted ? (
+              <>
+                <div className="quiz-question">
+                  <h4>Question {currentQuestion + 1}/3</h4>
+                  <p>{quizQuestions[currentQuestion].question}</p>
+                  
+                  <div className="quiz-options">
+                    {quizQuestions[currentQuestion].options.map((option, index) => (
+                      <button
+                        key={index}
+                        className={`quiz-option ${
+                          selectedAnswer === index ? 'selected' : ''
+                        } ${
+                          showQuizFeedback && index === quizQuestions[currentQuestion].correct
+                            ? 'correct'
+                            : ''
+                        } ${
+                          showQuizFeedback && selectedAnswer === index && index !== quizQuestions[currentQuestion].correct
+                            ? 'incorrect'
+                            : ''
+                        }`}
+                        onClick={() => handleQuizAnswer(index)}
+                        disabled={showQuizFeedback}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+
+                  {showQuizFeedback && (
+                    <div className="quiz-feedback">
+                      <p className={selectedAnswer === quizQuestions[currentQuestion].correct ? 'correct-feedback' : 'incorrect-feedback'}>
+                        {selectedAnswer === quizQuestions[currentQuestion].correct
+                          ? '✅ Bravo ! ' + quizQuestions[currentQuestion].explanation
+                          : '❌ Pas tout à fait. ' + quizQuestions[currentQuestion].explanation}
+                      </p>
+                      <button
+                        className="quiz-next-btn"
+                        onClick={handleNextQuestion}
+                      >
+                        {currentQuestion < 2 ? 'Question suivante' : 'Voir les résultats'}
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                <div className="quiz-progress">
+                  <div className="quiz-progress-bar">
+                    <div 
+                      className="quiz-progress-fill"
+                      style={{ width: `${((currentQuestion + 1) / 3) * 100}%` }}
+                    ></div>
+                  </div>
+                  <p className="quiz-score">Score: {quizScore}/3</p>
+                </div>
+              </>
+            ) : (
+              <div className="quiz-results">
+                <h4>🎉 Quiz terminé !</h4>
+                <p className="quiz-final-score">
+                  Vous avez obtenu {quizScore}/3 bonnes réponses !
+                </p>
+                {quizScore === 3 && (
+                  <p className="quiz-perfect">
+                    Parfait ! Vous avez tout compris ! +200 points bonus 🌟
+                  </p>
+                )}
+                {quizScore === 2 && (
+                  <p className="quiz-good">
+                    Très bien ! Vous avez bien suivi ! +100 points bonus ⭐
+                  </p>
+                )}
+                {quizScore === 1 && (
+                  <p className="quiz-encourage">
+                    Pas mal ! N'hésitez pas à relire certaines sections. +50 points 💫
+                  </p>
+                )}
+                {quizScore === 0 && (
+                  <p className="quiz-encourage">
+                    Ce n'est qu'un début ! Relisez la page et réessayez. +50 points 💫
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
 
         <section className="back-home-section">
           <div className="back-home-content">
