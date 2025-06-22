@@ -8,6 +8,7 @@ import './HomePage.css';
 
 export const HomePage = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { userStats } = useGamification();
@@ -22,6 +23,38 @@ export const HomePage = () => {
 
   const handleCardClick = (slug: string) => {
     navigate(`/concept/${slug}`);
+  };
+
+  const handleFilterClick = (
+    difficulty: string,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    // Si on clique sur le même filtre, pas d'animation
+    if (difficulty === selectedDifficulty) return;
+
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const ripple = document.createElement('span');
+    ripple.className = 'filter-ripple';
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    button.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+
+    // Déclencher la transition
+    setIsTransitioning(true);
+    
+    setTimeout(() => {
+      setSelectedDifficulty(difficulty);
+      setIsTransitioning(false);
+    }, 150);
   };
 
   return (
@@ -77,28 +110,28 @@ export const HomePage = () => {
       </header>
 
       <section className="filter-section">
-        <div className="filter-buttons">
+        <div className={`filter-buttons ${isTransitioning ? 'filter-changing' : ''}`}>
           <button
             className={`filter-btn ${selectedDifficulty === 'all' ? 'active' : ''}`}
-            onClick={() => setSelectedDifficulty('all')}
+            onClick={(e) => handleFilterClick('all', e)}
           >
             Tous les niveaux ({aiConcepts.length})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'beginner' ? 'active' : ''}`}
-            onClick={() => setSelectedDifficulty('beginner')}
+            onClick={(e) => handleFilterClick('beginner', e)}
           >
             🟢 Débutant ({conceptCounts.beginner})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'intermediate' ? 'active' : ''}`}
-            onClick={() => setSelectedDifficulty('intermediate')}
+            onClick={(e) => handleFilterClick('intermediate', e)}
           >
             🟡 Intermédiaire ({conceptCounts.intermediate})
           </button>
           <button
             className={`filter-btn ${selectedDifficulty === 'advanced' ? 'active' : ''}`}
-            onClick={() => setSelectedDifficulty('advanced')}
+            onClick={(e) => handleFilterClick('advanced', e)}
           >
             🔴 Avancé ({conceptCounts.advanced})
           </button>
@@ -106,7 +139,7 @@ export const HomePage = () => {
       </section>
 
       <main className="concepts-grid-container">
-        <div className="concepts-grid">
+        <div className={`concepts-grid ${isTransitioning ? 'transitioning' : ''}`}>
           {filteredConcepts.map((concept) => (
             <ConceptCard
               key={concept.id}
