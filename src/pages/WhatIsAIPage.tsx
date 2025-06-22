@@ -436,7 +436,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <p>Retournez à la page d'accueil pour explorer plus de sujets passionnants sur l'IA !</p>
             <button 
               className="back-home-btn"
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.href = '/home'}
             >
               <span className="btn-icon">🏠</span>
               <span className="btn-text">Retour à l'accueil</span>

@@ -68,7 +68,7 @@ export const ProfilePage: React.FC = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/');
+    navigate('/home');
   };
 
   if (loading) {

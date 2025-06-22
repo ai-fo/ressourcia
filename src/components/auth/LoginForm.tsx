@@ -29,6 +29,9 @@ export const LoginForm: React.FC = () => {
   return (
     <div className="auth-form-container">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <Link to="/home" className="auth-back-link">
+          ← Retour à l'accueil
+        </Link>
         <h2 className="auth-title">Connexion à Ressourcia</h2>
         
         {error && (

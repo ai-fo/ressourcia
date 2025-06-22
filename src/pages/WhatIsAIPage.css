@@ -842,21 +842,182 @@
 }
 
 @media (max-width: 768px) {
-  .back-home-section {
-    margin: var(--space-xl) var(--space-md);
-    padding: var(--space-lg);
+  /* Réduire les marges et paddings globaux */
+  .what-is-ai-page {
+    padding-bottom: var(--space-lg);
   }
 
+  /* Marges latérales uniformes pour toutes les sections */
+  .page-hero,
+  .story-section,
+  .interactive-section,
+  .history-section,
+  .technical-section,
+  .explanation-section,
+  .back-home-section {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Hero section mobile */
+  .page-hero {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md);
+  }
+
+  .hero-content {
+    gap: var(--space-lg);
+  }
+
+  .hero-image-container {
+    flex: 0 0 250px;
+    height: 250px;
+  }
+
+  /* Story section mobile */
+  .story-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .story-content {
+    padding: var(--space-md);
+  }
+
+  /* Interactive section mobile */
+  .interactive-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .ai-detective-game {
+    padding: var(--space-md);
+  }
+
+  /* History section mobile */
+  .history-section {
+    margin: var(--space-lg) 0;
+  }
+
+  .timeline-content {
+    margin: 0 0 0 30px;
+    padding: var(--space-md);
+  }
+
+  /* Technical section mobile */
+  .technical-section {
+    margin: var(--space-lg) 0;
+    max-width: 100%;
+  }
+
+  .technical-content {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Explanation section mobile */
+  .explanation-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .explanation-content {
+    padding: var(--space-md);
+  }
+
+  /* Back home section mobile */
+  .back-home-section {
+    margin: var(--space-lg) 0;
+  }
+
+  /* Tailles de police cohérentes basées sur rem */
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .page-subtitle,
+  .tech-intro {
+    font-size: 1.1rem;
+  }
+
+  .technical-title,
+  .history-title,
+  .ai-detective-game h3 {
+    font-size: 2rem;
+  }
+
+  .tech-explanation h3,
+  .timeline-content h3,
   .back-home-section h3 {
     font-size: 1.5rem;
   }
 
+  /* Corps de texte uniforme */
+  p,
+  .story-text,
+  .timeline-content p,
+  .tech-explanation p,
   .back-home-section p {
     font-size: 1rem;
+    line-height: 1.7;
   }
 
   .back-home-btn {
-    font-size: 1.1rem;
-    padding: var(--space-sm) var(--space-lg);
+    font-size: 1rem;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Ajustements généraux pour mobile */
+  section {
+    padding: var(--space-sm) !important;
+  }
+
+  /* Limiter les liquid blobs sur mobile */
+  .liquid-blob {
+    display: none;
+  }
+
+  /* Désactiver certaines animations lourdes */
+  .hero-image {
+    animation: none;
+  }
+
+  .image-liquid-effect {
+    display: none;
+  }
+}
+
+/* Media query pour très petits écrans */
+@media (max-width: 480px) {
+  /* Marges latérales encore plus réduites */
+  .page-hero,
+  .story-section,
+  .interactive-section,
+  .history-section,
+  .technical-section,
+  .explanation-section,
+  .back-home-section {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Paddings internes réduits */
+  .technical-content,
+  .story-content,
+  .ai-detective-game,
+  .explanation-content {
+    padding: 0.75rem;
+  }
+
+  /* Réduire la taille du jeu interactif */
+  .clickable-items {
+    grid-template-columns: 1fr;
+  }
+
+  .item-btn {
+    padding: 0.5rem;
+  }
+  
+  /* Ajuster l'image hero */
+  .hero-image-container {
+    flex: 0 0 200px;
+    height: 200px;
   }
 }

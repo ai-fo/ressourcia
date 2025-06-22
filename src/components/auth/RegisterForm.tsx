@@ -42,6 +42,9 @@ export const RegisterForm: React.FC = () => {
   return (
     <div className="auth-form-container">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <Link to="/home" className="auth-back-link">
+          ← Retour à l'accueil
+        </Link>
         <h2 className="auth-title">Rejoins Ressourcia !</h2>
         
         {error && (

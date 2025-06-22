@@ -3,6 +3,10 @@
 ## Vue d'ensemble
 Site web éducatif sur l'IA avec une approche ludique et narrative.
 
+## Instructions importantes
+- **NE JAMAIS exécuter `npm run dev`** - L'utilisateur s'en charge lui-même
+- Toujours attendre que l'utilisateur lance le serveur de développement
+
 ## Stack Technique
 - **Framework**: React 18
 - **Langage**: TypeScript
