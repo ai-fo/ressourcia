@@ -52,7 +52,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -60,14 +60,14 @@
 .nav-brand {
   display: flex;
   align-items: baseline;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .nav-logo {
   font-size: 1.8rem;
   font-weight: 800;
   color: var(--color-primary-orange-lighter);
-  font-family: 'Baloo 2', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -80,12 +80,12 @@
 
 .nav-links {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   align-items: center;
 }
 
 .nav-link {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-weight: 500;
@@ -119,25 +119,25 @@
 .filter-section {
   position: relative;
   z-index: 1;
-  padding: var(--space-lg) var(--space-lg) 0;
+  padding: var(--space-md) var(--space-md) 0;
   display: flex;
   justify-content: center;
-  margin-top: 80px; /* Pour compenser le header fixe */
+  margin-top: 60px; /* Pour compenser le header fixe */
 }
 
 .filter-buttons {
   display: flex;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .filter-btn {
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.2rem;
   border: none;
   background: transparent;
   border-radius: var(--radius-md);
@@ -163,7 +163,7 @@
 .concepts-grid-container {
   position: relative;
   z-index: 1;
-  padding: var(--space-xl) var(--space-lg);
+  padding: var(--space-lg) var(--space-md);
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -171,7 +171,7 @@
 .concepts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--space-lg);
+  gap: var(--space-md);
   animation: grid-appear 0.6s ease-out;
 }
 
@@ -264,7 +264,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .home-nav {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
   }
   
   .nav-brand {
@@ -282,11 +282,11 @@
   }
   
   .nav-links {
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
   
   .nav-link {
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--space-xs) var(--space-xs);
     font-size: 0.9rem;
   }
   
@@ -296,17 +296,17 @@
   }
   
   .filter-btn {
-    padding: 0.4rem 1rem;
+    padding: 0.3rem 0.8rem;
     font-size: 0.9rem;
   }
   
   .concepts-grid-container {
-    padding: var(--space-lg) var(--space-sm);
+    padding: var(--space-md) var(--space-xs);
   }
   
   .concepts-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
   
   .shape {

@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-lg);
+  padding: var(--space-md);
   background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
   position: relative;
   overflow: hidden;
@@ -49,7 +49,7 @@
   z-index: 1;
   width: 100%;
   max-width: 400px;
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   background: rgba(30, 58, 138, 0.3);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(59, 130, 246, 0.3);
@@ -60,9 +60,9 @@
 .auth-title {
   text-align: center;
   color: var(--color-primary-orange-lighter);
-  font-size: 2rem;
-  margin-bottom: var(--space-xl);
-  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.75rem;
+  margin-bottom: var(--space-lg);
+  font-family: 'Quicksand', sans-serif;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -84,7 +84,7 @@
 }
 
 .form-group {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .form-group label {
@@ -104,7 +104,7 @@
   color: white;
   font-size: 1rem;
   transition: all var(--transition-base);
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lexend', sans-serif;
 }
 
 .form-input:focus {
@@ -120,21 +120,21 @@
 
 .auth-submit-btn {
   width: 100%;
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   background: linear-gradient(135deg, 
     var(--color-primary-orange) 0%, 
     var(--color-primary-orange-light) 100%);
   color: white;
   border: none;
   border-radius: var(--radius-md);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-base);
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
   position: relative;
   overflow: hidden;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lexend', sans-serif;
 }
 
 .auth-submit-btn::before {
@@ -172,7 +172,7 @@
 .auth-link {
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-md);
   margin-bottom: 0;
 }
 
@@ -206,7 +206,7 @@
 /* Responsive */
 @media (max-width: 480px) {
   .auth-form {
-    padding: var(--space-lg);
+    padding: var(--space-md);
   }
 
   .auth-title {

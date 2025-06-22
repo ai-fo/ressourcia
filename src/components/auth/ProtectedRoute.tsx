@@ -18,7 +18,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         minHeight: '100vh',
         fontSize: '1.5rem',
         color: '#f97316',
-        fontFamily: 'Baloo 2, sans-serif'
+        fontFamily: 'Quicksand, sans-serif'
       }}>
         Chargement...
       </div>
