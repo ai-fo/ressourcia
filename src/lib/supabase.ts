@@ -4,7 +4,11 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 // Configuration de développement avec instructions
-if (!supabaseUrl || !supabaseAnonKey || supabaseUrl === 'https://your-project.supabase.co') {
+if (
+  !supabaseUrl ||
+  !supabaseAnonKey ||
+  supabaseUrl === 'https://your-project.supabase.co'
+) {
   console.warn(`
 🚨 Configuration Supabase requise !
 

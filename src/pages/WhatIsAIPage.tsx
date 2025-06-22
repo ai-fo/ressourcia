@@ -24,7 +24,7 @@ Jusqu'au jour magique où Alice s'exclama : "ALBERT, où est mon tournevis ?"
 "C'est mardi, donc sur l'étagère, troisième rayon, derrière la boîte de vis", répondit ALBERT.
 Il avait raison. Pour la première fois, une machine avait vraiment compris.`,
     fact: {
-      title: "💡 Le saviez-vous ?",
+      title: '💡 Le saviez-vous ?',
       description: `En 1950, Alan Turing a proposé le "Test de Turing" : si une machine peut avoir une conversation si naturelle qu'on ne peut pas la distinguer d'un humain, alors on peut dire qu'elle "pense". Aujourd'hui, certaines IA réussissent ce test... mais comprennent-elles vraiment ou font-elles juste semblant ? Le débat continue !`,
     },
   };
@@ -100,9 +100,9 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               </p>
             </div>
             <div className="hero-image-container">
-              <img 
-                src="/images/concepts/questcequelia.png" 
-                alt="Qu'est-ce que l'IA ?" 
+              <img
+                src="/images/concepts/questcequelia.png"
+                alt="Qu'est-ce que l'IA ?"
                 className="hero-image"
               />
               <div className="image-liquid-effect"></div>
@@ -116,8 +116,8 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
           <div className="ai-detective-game">
             <h3>🕵️ Devenez détective de l'IA !</h3>
             <p>
-              Trouvez les IA cachées dans ces situations du quotidien. Cliquez sur
-              tout ce qui utilise l'IA !
+              Trouvez les IA cachées dans ces situations du quotidien. Cliquez
+              sur tout ce qui utilise l'IA !
             </p>
 
             <div className="game-scenarios">
@@ -252,13 +252,17 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <section className="history-section">
           <h2 className="history-title">📚 L'Histoire Fascinante de l'IA</h2>
-          
+
           <div className="timeline">
             <div className="timeline-item">
               <div className="timeline-date">1950</div>
               <div className="timeline-content">
                 <h3>Le Test de Turing</h3>
-                <p>Alan Turing imagine un test simple : si une machine peut discuter avec toi sans que tu devines que c'est une machine, alors elle "pense". C'était révolutionnaire !</p>
+                <p>
+                  Alan Turing imagine un test simple : si une machine peut
+                  discuter avec toi sans que tu devines que c'est une machine,
+                  alors elle "pense". C'était révolutionnaire !
+                </p>
               </div>
             </div>
 
@@ -266,7 +270,11 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">1956</div>
               <div className="timeline-content">
                 <h3>Naissance de l'IA</h3>
-                <p>Des scientifiques se réunissent à Dartmouth et décident : "On va créer des machines intelligentes !" Spoiler : c'était plus dur que prévu...</p>
+                <p>
+                  Des scientifiques se réunissent à Dartmouth et décident : "On
+                  va créer des machines intelligentes !" Spoiler : c'était plus
+                  dur que prévu...
+                </p>
               </div>
             </div>
 
@@ -274,7 +282,11 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">1966</div>
               <div className="timeline-content">
                 <h3>ELIZA, la première psy robot</h3>
-                <p>Un programme qui fait semblant d'être psychologue. Les gens lui racontent leur vie ! Preuve que les humains veulent vraiment parler à quelqu'un... même une machine.</p>
+                <p>
+                  Un programme qui fait semblant d'être psychologue. Les gens
+                  lui racontent leur vie ! Preuve que les humains veulent
+                  vraiment parler à quelqu'un... même une machine.
+                </p>
               </div>
             </div>
 
@@ -282,7 +294,11 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">1997</div>
               <div className="timeline-content">
                 <h3>Deep Blue bat Kasparov</h3>
-                <p>Pour la première fois, un ordinateur bat le champion du monde d'échecs ! Les humains commencent à se dire : "Oups, elles deviennent fortes ces machines..."</p>
+                <p>
+                  Pour la première fois, un ordinateur bat le champion du monde
+                  d'échecs ! Les humains commencent à se dire : "Oups, elles
+                  deviennent fortes ces machines..."
+                </p>
               </div>
             </div>
 
@@ -290,7 +306,11 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">2011</div>
               <div className="timeline-content">
                 <h3>Siri dit "Bonjour !"</h3>
-                <p>Apple lance Siri et soudain, tout le monde parle à son téléphone. "Dis Siri, raconte-moi une blague !" devient la phrase la plus prononcée au monde.</p>
+                <p>
+                  Apple lance Siri et soudain, tout le monde parle à son
+                  téléphone. "Dis Siri, raconte-moi une blague !" devient la
+                  phrase la plus prononcée au monde.
+                </p>
               </div>
             </div>
 
@@ -298,7 +318,12 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">2016</div>
               <div className="timeline-content">
                 <h3>AlphaGo, maître du Go</h3>
-                <p>L'IA de Google bat le champion du monde de Go, un jeu si complexe qu'on pensait qu'aucune machine ne pourrait y jouer. Plot twist : elle invente des coups que personne n'avait imaginés !</p>
+                <p>
+                  L'IA de Google bat le champion du monde de Go, un jeu si
+                  complexe qu'on pensait qu'aucune machine ne pourrait y jouer.
+                  Plot twist : elle invente des coups que personne n'avait
+                  imaginés !
+                </p>
               </div>
             </div>
 
@@ -306,7 +331,11 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">2022</div>
               <div className="timeline-content">
                 <h3>ChatGPT débarque</h3>
-                <p>OpenAI lance ChatGPT et c'est la folie ! Tout le monde lui demande de faire ses devoirs, d'écrire des poèmes, ou juste de discuter. L'IA devient mainstream.</p>
+                <p>
+                  OpenAI lance ChatGPT et c'est la folie ! Tout le monde lui
+                  demande de faire ses devoirs, d'écrire des poèmes, ou juste de
+                  discuter. L'IA devient mainstream.
+                </p>
               </div>
             </div>
 
@@ -314,115 +343,148 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               <div className="timeline-date">Futur</div>
               <div className="timeline-content">
                 <h3>Et maintenant ?</h3>
-                <p>L'IA continue d'évoluer ! Qui sait, peut-être qu'un jour elle nous aidera à explorer l'espace, soigner toutes les maladies, ou... enfin comprendre pourquoi on perd toujours une chaussette dans la machine à laver !</p>
+                <p>
+                  L'IA continue d'évoluer ! Qui sait, peut-être qu'un jour elle
+                  nous aidera à explorer l'espace, soigner toutes les maladies,
+                  ou... enfin comprendre pourquoi on perd toujours une
+                  chaussette dans la machine à laver !
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         <section className="technical-section">
-          <h2 className="technical-title">🔧 Pour les curieux : L'IA expliquée plus en profondeur</h2>
-          
+          <h2 className="technical-title">
+            🔧 Pour les curieux : L'IA expliquée plus en profondeur
+          </h2>
+
           <div className="technical-content">
             <div className="tech-explanation">
               <p className="tech-intro">
-                Maintenant qu'on a compris les bases, plongeons un peu plus dans les détails techniques. 
-                Ne vous inquiétez pas, on va rester accessible !
+                Maintenant qu'on a compris les bases, plongeons un peu plus dans
+                les détails techniques. Ne vous inquiétez pas, on va rester
+                accessible !
               </p>
 
               <h3>Comment une machine peut-elle "apprendre" ?</h3>
               <p>
-                Au cœur de l'IA moderne, on trouve les <strong>réseaux de neurones artificiels</strong>. 
-                Inspirés du cerveau humain, ces réseaux sont composés de milliers (voire millions) de 
-                "neurones" artificiels organisés en couches. Chaque neurone est en fait une simple 
-                fonction mathématique qui reçoit des nombres en entrée, les multiplie par des "poids", 
-                ajoute un "biais", et applique une fonction d'activation pour produire une sortie.
+                Au cœur de l'IA moderne, on trouve les{' '}
+                <strong>réseaux de neurones artificiels</strong>. Inspirés du
+                cerveau humain, ces réseaux sont composés de milliers (voire
+                millions) de "neurones" artificiels organisés en couches. Chaque
+                neurone est en fait une simple fonction mathématique qui reçoit
+                des nombres en entrée, les multiplie par des "poids", ajoute un
+                "biais", et applique une fonction d'activation pour produire une
+                sortie.
               </p>
               <p>
-                L'apprentissage se fait par un processus appelé <strong>rétropropagation du gradient</strong>. 
-                Quand le réseau fait une prédiction incorrecte, on calcule l'erreur et on la "propage" 
-                en arrière à travers le réseau. Chaque poids est alors légèrement ajusté pour réduire 
-                cette erreur. Répété des millions de fois sur des milliers d'exemples, ce processus 
-                permet au réseau d'apprendre des patterns de plus en plus complexes.
+                L'apprentissage se fait par un processus appelé{' '}
+                <strong>rétropropagation du gradient</strong>. Quand le réseau
+                fait une prédiction incorrecte, on calcule l'erreur et on la
+                "propage" en arrière à travers le réseau. Chaque poids est alors
+                légèrement ajusté pour réduire cette erreur. Répété des millions
+                de fois sur des milliers d'exemples, ce processus permet au
+                réseau d'apprendre des patterns de plus en plus complexes.
               </p>
 
               <h3>Les différents types d'apprentissage</h3>
               <p>
-                L'<strong>apprentissage supervisé</strong> est le plus courant. On donne à l'IA des 
-                exemples avec leurs réponses correctes (des images de chats étiquetées "chat"). 
-                C'est comme un professeur qui corrige les devoirs. Les algorithmes comme les réseaux 
-                de neurones convolutifs (CNN) excellent dans la reconnaissance d'images grâce à leur 
-                capacité à détecter des motifs visuels hiérarchiques : d'abord des lignes et des 
-                formes simples, puis des textures, et enfin des objets complets.
+                L'<strong>apprentissage supervisé</strong> est le plus courant.
+                On donne à l'IA des exemples avec leurs réponses correctes (des
+                images de chats étiquetées "chat"). C'est comme un professeur
+                qui corrige les devoirs. Les algorithmes comme les réseaux de
+                neurones convolutifs (CNN) excellent dans la reconnaissance
+                d'images grâce à leur capacité à détecter des motifs visuels
+                hiérarchiques : d'abord des lignes et des formes simples, puis
+                des textures, et enfin des objets complets.
               </p>
               <p>
-                L'<strong>apprentissage non supervisé</strong> est plus subtil. L'IA doit trouver 
-                des structures cachées dans les données sans qu'on lui dise quoi chercher. Les 
-                autoencodeurs, par exemple, apprennent à compresser puis reconstruire des données, 
-                découvrant ainsi leurs caractéristiques essentielles. Les algorithmes de clustering 
-                comme K-means regroupent automatiquement des données similaires.
+                L'<strong>apprentissage non supervisé</strong> est plus subtil.
+                L'IA doit trouver des structures cachées dans les données sans
+                qu'on lui dise quoi chercher. Les autoencodeurs, par exemple,
+                apprennent à compresser puis reconstruire des données,
+                découvrant ainsi leurs caractéristiques essentielles. Les
+                algorithmes de clustering comme K-means regroupent
+                automatiquement des données similaires.
               </p>
               <p>
-                L'<strong>apprentissage par renforcement</strong> est fascinant : l'IA apprend par 
-                essai-erreur en recevant des récompenses ou des punitions. C'est ainsi qu'AlphaGo 
-                a appris à jouer au Go en jouant des millions de parties contre elle-même, ou que 
-                des robots apprennent à marcher en étant "récompensés" quand ils avancent sans tomber.
+                L'<strong>apprentissage par renforcement</strong> est fascinant
+                : l'IA apprend par essai-erreur en recevant des récompenses ou
+                des punitions. C'est ainsi qu'AlphaGo a appris à jouer au Go en
+                jouant des millions de parties contre elle-même, ou que des
+                robots apprennent à marcher en étant "récompensés" quand ils
+                avancent sans tomber.
               </p>
 
-              <h3>La révolution des Transformers et des Large Language Models</h3>
+              <h3>
+                La révolution des Transformers et des Large Language Models
+              </h3>
               <p>
-                En 2017, l'architecture <strong>Transformer</strong> a révolutionné l'IA. Sa grande 
-                innovation ? Le mécanisme d'<strong>attention</strong>, qui permet au modèle de 
-                comprendre les relations entre tous les mots d'une phrase simultanément, plutôt 
-                que de les traiter séquentiellement. Imaginez que vous lisez une phrase : votre cerveau 
-                ne lit pas mot par mot de façon isolée, mais comprend comment chaque mot se rapporte 
-                aux autres. Les Transformers font pareil !
+                En 2017, l'architecture <strong>Transformer</strong> a
+                révolutionné l'IA. Sa grande innovation ? Le mécanisme d'
+                <strong>attention</strong>, qui permet au modèle de comprendre
+                les relations entre tous les mots d'une phrase simultanément,
+                plutôt que de les traiter séquentiellement. Imaginez que vous
+                lisez une phrase : votre cerveau ne lit pas mot par mot de façon
+                isolée, mais comprend comment chaque mot se rapporte aux autres.
+                Les Transformers font pareil !
               </p>
               <p>
-                Les <strong>Large Language Models (LLMs)</strong> comme GPT, Claude ou LLaMA sont 
-                des Transformers entraînés sur d'énormes quantités de texte. Ils ont appris à prédire 
-                le mot suivant dans une phrase, mais ce faisant, ils ont développé une compréhension 
-                remarquable du langage, du contexte, et même du raisonnement. Avec des milliards de 
-                paramètres (les poids du réseau), ils peuvent générer du texte cohérent, répondre à 
-                des questions, traduire, programmer, et bien plus.
+                Les <strong>Large Language Models (LLMs)</strong> comme GPT,
+                Claude ou LLaMA sont des Transformers entraînés sur d'énormes
+                quantités de texte. Ils ont appris à prédire le mot suivant dans
+                une phrase, mais ce faisant, ils ont développé une compréhension
+                remarquable du langage, du contexte, et même du raisonnement.
+                Avec des milliards de paramètres (les poids du réseau), ils
+                peuvent générer du texte cohérent, répondre à des questions,
+                traduire, programmer, et bien plus.
               </p>
 
               <h3>Les défis techniques actuels</h3>
               <p>
-                L'<strong>explicabilité</strong> reste un défi majeur. Les réseaux de neurones profonds 
-                sont souvent des "boîtes noires" : on sait qu'ils fonctionnent, mais comprendre 
-                exactement pourquoi ils prennent une décision spécifique est difficile. Des techniques 
-                comme LIME ou SHAP tentent d'expliquer les prédictions, mais c'est encore un domaine 
-                de recherche actif.
+                L'<strong>explicabilité</strong> reste un défi majeur. Les
+                réseaux de neurones profonds sont souvent des "boîtes noires" :
+                on sait qu'ils fonctionnent, mais comprendre exactement pourquoi
+                ils prennent une décision spécifique est difficile. Des
+                techniques comme LIME ou SHAP tentent d'expliquer les
+                prédictions, mais c'est encore un domaine de recherche actif.
               </p>
               <p>
-                La <strong>généralisation</strong> est un autre défi. Une IA entraînée sur certaines 
-                données peut mal performer sur des données légèrement différentes. C'est pourquoi une 
-                IA de reconnaissance faciale entraînée principalement sur des visages européens peut 
-                avoir des difficultés avec d'autres ethnicités. L'augmentation de données et les 
-                techniques de régularisation aident, mais le problème persiste.
+                La <strong>généralisation</strong> est un autre défi. Une IA
+                entraînée sur certaines données peut mal performer sur des
+                données légèrement différentes. C'est pourquoi une IA de
+                reconnaissance faciale entraînée principalement sur des visages
+                européens peut avoir des difficultés avec d'autres ethnicités.
+                L'augmentation de données et les techniques de régularisation
+                aident, mais le problème persiste.
               </p>
               <p>
-                L'<strong>efficacité énergétique</strong> devient cruciale. Entraîner un grand modèle 
-                peut consommer autant d'électricité qu'une petite ville pendant plusieurs jours. Les 
-                chercheurs explorent des architectures plus efficaces, la quantification (réduire la 
-                précision des calculs), et l'apprentissage par transfert (réutiliser des modèles 
-                pré-entraînés).
+                L'<strong>efficacité énergétique</strong> devient cruciale.
+                Entraîner un grand modèle peut consommer autant d'électricité
+                qu'une petite ville pendant plusieurs jours. Les chercheurs
+                explorent des architectures plus efficaces, la quantification
+                (réduire la précision des calculs), et l'apprentissage par
+                transfert (réutiliser des modèles pré-entraînés).
               </p>
 
               <h3>Vers le futur : AGI et au-delà</h3>
               <p>
-                L'<strong>Intelligence Artificielle Générale (AGI)</strong> - une IA aussi polyvalente 
-                qu'un humain - reste un objectif lointain. Les IA actuelles sont des "IA étroites" : 
-                excellentes dans des domaines spécifiques mais incapables de généraliser comme nous. 
-                Une IA qui bat le champion du monde d'échecs ne sait pas faire cuire un œuf !
+                L'<strong>Intelligence Artificielle Générale (AGI)</strong> -
+                une IA aussi polyvalente qu'un humain - reste un objectif
+                lointain. Les IA actuelles sont des "IA étroites" : excellentes
+                dans des domaines spécifiques mais incapables de généraliser
+                comme nous. Une IA qui bat le champion du monde d'échecs ne sait
+                pas faire cuire un œuf !
               </p>
               <p>
-                Les approches prometteuses incluent l'apprentissage multi-modal (combiner vision, 
-                langage, son), l'apprentissage continu (apprendre de nouvelles tâches sans oublier 
-                les anciennes), et peut-être des architectures complètement nouvelles inspirées par 
-                les neurosciences. Certains pensent que l'AGI arrivera dans 10-20 ans, d'autres 
-                pensent qu'il faudra un siècle. Une chose est sûre : le voyage sera passionnant !
+                Les approches prometteuses incluent l'apprentissage multi-modal
+                (combiner vision, langage, son), l'apprentissage continu
+                (apprendre de nouvelles tâches sans oublier les anciennes), et
+                peut-être des architectures complètement nouvelles inspirées par
+                les neurosciences. Certains pensent que l'AGI arrivera dans
+                10-20 ans, d'autres pensent qu'il faudra un siècle. Une chose
+                est sûre : le voyage sera passionnant !
               </p>
             </div>
           </div>
@@ -433,10 +495,13 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
         <section className="back-home-section">
           <div className="back-home-content">
             <h3>Vous voulez découvrir d'autres concepts ?</h3>
-            <p>Retournez à la page d'accueil pour explorer plus de sujets passionnants sur l'IA !</p>
-            <button 
+            <p>
+              Retournez à la page d'accueil pour explorer plus de sujets
+              passionnants sur l'IA !
+            </p>
+            <button
               className="back-home-btn"
-              onClick={() => window.location.href = '/home'}
+              onClick={() => (window.location.href = '/home')}
             >
               <span className="btn-icon">🏠</span>
               <span className="btn-text">Retour à l'accueil</span>

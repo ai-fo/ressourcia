@@ -56,7 +56,7 @@ export const IntroPage: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach(particle => {
+      particles.forEach((particle) => {
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
@@ -100,9 +100,9 @@ export const IntroPage: React.FC = () => {
       {/* Liquid blobs background */}
       <div className="intro-liquid-blob intro-liquid-blob-1"></div>
       <div className="intro-liquid-blob intro-liquid-blob-2"></div>
-      
+
       <canvas ref={canvasRef} className="sparkles-canvas" />
-      
+
       <div className="intro-content">
         <h1 className="intro-title">
           <span className="title-main">

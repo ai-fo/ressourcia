@@ -33,12 +33,8 @@ export const LoginForm: React.FC = () => {
           ← Retour à l'accueil
         </Link>
         <h2 className="auth-title">Connexion à Ressourcia</h2>
-        
-        {error && (
-          <div className="auth-error">
-            {error}
-          </div>
-        )}
+
+        {error && <div className="auth-error">{error}</div>}
 
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -66,17 +62,12 @@ export const LoginForm: React.FC = () => {
           />
         </div>
 
-        <button 
-          type="submit" 
-          className="auth-submit-btn"
-          disabled={loading}
-        >
+        <button type="submit" className="auth-submit-btn" disabled={loading}>
           {loading ? 'Connexion...' : 'Se connecter'}
         </button>
 
         <p className="auth-link">
-          Pas encore de compte ?{' '}
-          <Link to="/register">Créer un compte</Link>
+          Pas encore de compte ? <Link to="/register">Créer un compte</Link>
         </p>
       </form>
     </div>

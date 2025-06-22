@@ -96,7 +96,9 @@ export const ProfilePage: React.FC = () => {
           </header>
 
           {message && (
-            <div className={`profile-message ${message.includes('Erreur') ? 'error' : 'success'}`}>
+            <div
+              className={`profile-message ${message.includes('Erreur') ? 'error' : 'success'}`}
+            >
               {message}
             </div>
           )}
@@ -117,7 +119,12 @@ export const ProfilePage: React.FC = () => {
                   type="url"
                   placeholder="URL de l'avatar"
                   value={editedProfile.avatar_url || ''}
-                  onChange={(e) => setEditedProfile({ ...editedProfile, avatar_url: e.target.value })}
+                  onChange={(e) =>
+                    setEditedProfile({
+                      ...editedProfile,
+                      avatar_url: e.target.value,
+                    })
+                  }
                   className="form-input"
                 />
               )}
@@ -130,11 +137,18 @@ export const ProfilePage: React.FC = () => {
                   <input
                     type="text"
                     value={editedProfile.username || ''}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, username: e.target.value })}
+                    onChange={(e) =>
+                      setEditedProfile({
+                        ...editedProfile,
+                        username: e.target.value,
+                      })
+                    }
                     className="form-input"
                   />
                 ) : (
-                  <p className="info-value">{profile.username || 'Non défini'}</p>
+                  <p className="info-value">
+                    {profile.username || 'Non défini'}
+                  </p>
                 )}
               </div>
 
@@ -144,12 +158,19 @@ export const ProfilePage: React.FC = () => {
                   <input
                     type="text"
                     value={editedProfile.full_name || ''}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, full_name: e.target.value })}
+                    onChange={(e) =>
+                      setEditedProfile({
+                        ...editedProfile,
+                        full_name: e.target.value,
+                      })
+                    }
                     className="form-input"
                     placeholder="Ton nom complet"
                   />
                 ) : (
-                  <p className="info-value">{profile.full_name || 'Non défini'}</p>
+                  <p className="info-value">
+                    {profile.full_name || 'Non défini'}
+                  </p>
                 )}
               </div>
 
@@ -158,7 +179,12 @@ export const ProfilePage: React.FC = () => {
                 {editing ? (
                   <textarea
                     value={editedProfile.bio || ''}
-                    onChange={(e) => setEditedProfile({ ...editedProfile, bio: e.target.value })}
+                    onChange={(e) =>
+                      setEditedProfile({
+                        ...editedProfile,
+                        bio: e.target.value,
+                      })
+                    }
                     className="form-input bio-input"
                     placeholder="Parle-nous de toi et de ta passion pour l'IA !"
                     rows={4}
@@ -179,18 +205,18 @@ export const ProfilePage: React.FC = () => {
             <div className="profile-actions">
               {editing ? (
                 <>
-                  <button 
-                    onClick={handleSave} 
+                  <button
+                    onClick={handleSave}
                     className="save-btn"
                     disabled={loading}
                   >
                     {loading ? 'Sauvegarde...' : 'Sauvegarder'}
                   </button>
-                  <button 
+                  <button
                     onClick={() => {
                       setEditing(false);
                       setEditedProfile(profile);
-                    }} 
+                    }}
                     className="cancel-btn"
                   >
                     Annuler

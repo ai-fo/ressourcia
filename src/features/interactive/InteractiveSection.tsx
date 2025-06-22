@@ -20,14 +20,13 @@ export const InteractiveSection: React.FC<InteractiveSectionProps> = ({
         </>
       )}
       <div className="interactive-container">
-        {children || (
-          interactive && (
+        {children ||
+          (interactive && (
             <div className="interactive-placeholder">
               <p>Élément interactif: {interactive.type}</p>
               <p>Configuration: {JSON.stringify(interactive.config)}</p>
             </div>
-          )
-        )}
+          ))}
       </div>
     </section>
   );

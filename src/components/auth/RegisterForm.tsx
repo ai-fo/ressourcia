@@ -46,12 +46,8 @@ export const RegisterForm: React.FC = () => {
           ← Retour à l'accueil
         </Link>
         <h2 className="auth-title">Rejoins Ressourcia !</h2>
-        
-        {error && (
-          <div className="auth-error">
-            {error}
-          </div>
-        )}
+
+        {error && <div className="auth-error">{error}</div>}
 
         <div className="form-group">
           <label htmlFor="username">Nom d'utilisateur</label>
@@ -105,17 +101,12 @@ export const RegisterForm: React.FC = () => {
           />
         </div>
 
-        <button 
-          type="submit" 
-          className="auth-submit-btn"
-          disabled={loading}
-        >
+        <button type="submit" className="auth-submit-btn" disabled={loading}>
           {loading ? 'Création...' : 'Créer mon compte'}
         </button>
 
         <p className="auth-link">
-          Déjà un compte ?{' '}
-          <Link to="/login">Se connecter</Link>
+          Déjà un compte ? <Link to="/login">Se connecter</Link>
         </p>
       </form>
     </div>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../services/supabase';
 
 interface AuthContextType {
   user: User | null;
@@ -22,14 +22,16 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
   // Vérifier si Supabase est configuré
-  const isSupabaseConfigured = 
-    import.meta.env.VITE_SUPABASE_URL && 
+  const isSupabaseConfigured =
+    import.meta.env.VITE_SUPABASE_URL &&
     import.meta.env.VITE_SUPABASE_URL !== 'https://your-project.supabase.co';
 
   useEffect(() => {
@@ -47,7 +49,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     // Écouter les changements d'authentification
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
     });
@@ -57,11 +61,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signUp = async (email: string, password: string, username?: string) => {
     if (!isSupabaseConfigured) {
-      return { 
-        data: null, 
-        error: { 
-          message: 'Supabase n\'est pas configuré. Consulte la console pour les instructions.' 
-        } 
+      return {
+        data: null,
+        error: {
+          message:
+            "Supabase n'est pas configuré. Consulte la console pour les instructions.",
+        },
       };
     }
 
@@ -71,8 +76,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       options: {
         data: {
           username,
-        }
-      }
+        },
+      },
     });
 
     if (!error && data.user) {
@@ -88,11 +93,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, password: string) => {
     if (!isSupabaseConfigured) {
-      return { 
-        data: null, 
-        error: { 
-          message: 'Supabase n\'est pas configuré. Consulte la console pour les instructions.' 
-        } 
+      return {
+        data: null,
+        error: {
+          message:
+            "Supabase n'est pas configuré. Consulte la console pour les instructions.",
+        },
       };
     }
 

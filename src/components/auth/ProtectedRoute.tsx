@@ -11,15 +11,17 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (loading) {
     return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        fontSize: '1.5rem',
-        color: '#f97316',
-        fontFamily: 'Quicksand, sans-serif'
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          fontSize: '1.5rem',
+          color: '#f97316',
+          fontFamily: 'Quicksand, sans-serif',
+        }}
+      >
         Chargement...
       </div>
     );

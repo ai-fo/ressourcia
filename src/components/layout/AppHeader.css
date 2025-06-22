@@ -1,0 +1,101 @@
+@import '../../styles/variables.css';
+
+/* Header */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Navigation */
+.app-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary-orange-lighter);
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-slogan {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.nav-link {
+  padding: var(--space-xs) var(--space-sm);
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link--profile {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-link--cta {
+  background: linear-gradient(135deg, var(--color-primary-orange) 0%, var(--color-primary-orange-lighter) 100%);
+  color: white;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-md);
+  border: none;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.nav-link--cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+  background: linear-gradient(135deg, var(--color-primary-orange-lighter) 0%, var(--color-primary-orange) 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-slogan {
+    display: none;
+  }
+
+  .nav-logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-link {
+    padding: var(--space-xs);
+    font-size: 0.9rem;
+  }
+}

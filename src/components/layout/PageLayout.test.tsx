@@ -4,7 +4,7 @@ import { PageLayout } from './PageLayout';
 describe('PageLayout', () => {
   it('renders header with title', () => {
     render(<PageLayout>Test Content</PageLayout>);
-    const title = screen.getByText('AI Explorer');
+    const title = screen.getByText('Ressourcia');
     expect(title).toBeInTheDocument();
   });
 
@@ -16,7 +16,7 @@ describe('PageLayout', () => {
 
   it('renders footer with copyright', () => {
     render(<PageLayout>Test</PageLayout>);
-    const footer = screen.getByText(/© 2025 AI Explorer/);
+    const footer = screen.getByText(/© 2025 Ressourcia/);
     expect(footer).toBeInTheDocument();
   });
 

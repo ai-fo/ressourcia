@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppHeader } from './AppHeader';
 import './PageLayout.css';
 
 interface PageLayoutProps {
@@ -8,14 +9,10 @@ interface PageLayoutProps {
 export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
     <div className="page-layout">
-      <header className="page-header">
-        <nav>
-          <h1>AI Explorer</h1>
-        </nav>
-      </header>
+      <AppHeader />
       <main className="page-content">{children}</main>
       <footer className="page-footer">
-        <p>&copy; 2025 AI Explorer - Apprendre l'IA de façon ludique</p>
+        <p>&copy; 2025 Ressourcia - Apprendre l'IA de façon ludique</p>
       </footer>
     </div>
   );
