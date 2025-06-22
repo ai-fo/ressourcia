@@ -844,6 +844,11 @@
   background: rgba(30, 58, 138, 0.4);
 }
 
+.suggested-card:focus {
+  outline: 3px solid var(--color-primary-blue-light);
+  outline-offset: 2px;
+}
+
 .suggested-icon {
   font-size: 2.5rem;
   display: block;

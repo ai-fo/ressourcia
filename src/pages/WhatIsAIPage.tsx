@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageLayout } from '../components/layout/PageLayout';
 import { StorySection } from '../features/storytelling/StorySection';
 import { InteractiveSection } from '../features/interactive/InteractiveSection';
@@ -10,6 +11,7 @@ import './WhatIsAIPage.css';
 export const WhatIsAIPage = () => {
   const [userChoices, setUserChoices] = useState<string[]>([]);
   const [hasCompleted, setHasCompleted] = useState(false);
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { completeChapter, progress } = useGamification();
 
@@ -540,17 +542,47 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             </p>
             
             <div className="suggested-concepts">
-              <div className="suggested-card">
+              <div 
+                className="suggested-card"
+                onClick={() => navigate('/concept/machine-learning')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    navigate('/concept/machine-learning');
+                  }
+                }}
+              >
                 <span className="suggested-icon">🤖</span>
                 <h4>Machine Learning</h4>
                 <p>Comment les machines apprennent-elles vraiment ?</p>
               </div>
-              <div className="suggested-card">
+              <div 
+                className="suggested-card"
+                onClick={() => navigate('/concept/neural-networks')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    navigate('/concept/neural-networks');
+                  }
+                }}
+              >
                 <span className="suggested-icon">🧠</span>
                 <h4>Réseaux de neurones</h4>
                 <p>Le cerveau artificiel décrypté simplement</p>
               </div>
-              <div className="suggested-card">
+              <div 
+                className="suggested-card"
+                onClick={() => navigate('/concept/chatgpt-llm')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    navigate('/concept/chatgpt-llm');
+                  }
+                }}
+              >
                 <span className="suggested-icon">💬</span>
                 <h4>ChatGPT & LLMs</h4>
                 <p>Les secrets des IA conversationnelles</p>
@@ -559,7 +591,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
             <button
               className="back-home-btn"
-              onClick={() => (window.location.href = '/home')}
+              onClick={() => navigate('/home')}
             >
               <span className="btn-icon">🚀</span>
               <span className="btn-text">Explorer tous les concepts</span>
