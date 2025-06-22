@@ -230,31 +230,6 @@ export const ProfilePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="profile-stats">
-            <h2>Tes statistiques d'apprentissage</h2>
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-icon">📚</div>
-                <div className="stat-value">0</div>
-                <div className="stat-label">Concepts explorés</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-icon">🎮</div>
-                <div className="stat-value">0</div>
-                <div className="stat-label">Jeux complétés</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-icon">⏱️</div>
-                <div className="stat-value">0h</div>
-                <div className="stat-label">Temps d'apprentissage</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-icon">🏆</div>
-                <div className="stat-value">0</div>
-                <div className="stat-label">Badges gagnés</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </PageLayout>

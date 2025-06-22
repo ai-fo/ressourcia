@@ -330,16 +330,42 @@
   margin: 0;
 }
 
+.success-container {
+  margin-top: var(--space-md);
+}
+
 .success-message {
   color: var(--color-primary-orange-lighter) !important;
   font-size: 1.5rem !important;
-  margin-top: var(--space-xs) !important;
+  margin-bottom: var(--space-xs) !important;
   animation: success-glow 2s ease infinite;
 }
 
 @keyframes success-glow {
   0%, 100% { text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); }
   50% { text-shadow: 0 0 20px rgba(249, 115, 22, 0.8); }
+}
+
+.points-earned {
+  color: var(--color-primary-orange);
+  font-weight: 600;
+  font-size: 1.2rem;
+  animation: points-pop 0.5s ease-out;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes points-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Sections avec effet glassmorphism */

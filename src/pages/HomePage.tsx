@@ -3,12 +3,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ConceptCard } from '../components/ui/ConceptCard';
 import { aiConcepts, getConceptCountByDifficulty } from '../data/concepts';
 import { useAuth } from '../contexts/AuthContext';
+import { useGamification } from '../contexts/GamificationContext';
 import './HomePage.css';
 
 export const HomePage = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { userStats } = useGamification();
   const conceptCounts = getConceptCountByDifficulty();
 
   const filteredConcepts =
@@ -29,12 +31,33 @@ export const HomePage = () => {
       <header className="home-header">
         <nav className="home-nav">
           <div className="nav-brand">
-            <div className="nav-logo">Ressourcia</div>
+            <Link to="/home" className="nav-logo-link">
+              <div className="nav-logo">Ressourcia</div>
+            </Link>
             <div className="nav-slogan">L'IA racontée autrement</div>
           </div>
           <div className="nav-links">
+            {user && userStats && (
+              <div className="header-stats">
+                <span className="header-stat">
+                  <span className="stat-icon">⭐</span>
+                  <span className="stat-value">{userStats.points}</span>
+                </span>
+                <span className="header-stat">
+                  <span className="stat-icon">🎯</span>
+                  <span className="stat-value">Niv. {userStats.level}</span>
+                </span>
+                <span className="header-stat">
+                  <span className="stat-icon">🔥</span>
+                  <span className="stat-value">{userStats.streakDays}</span>
+                </span>
+              </div>
+            )}
             {user ? (
               <>
+                <Link to="/achievements" className="nav-link">
+                  Mes Achievements
+                </Link>
                 <Link to="/profile" className="nav-link nav-link--profile">
                   Mon profil
                 </Link>

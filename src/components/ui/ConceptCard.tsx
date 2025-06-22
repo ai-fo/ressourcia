@@ -10,12 +10,6 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
   concept,
   onClick,
 }) => {
-  const difficultyLabel = {
-    beginner: '🟢 Débutant',
-    intermediate: '🟡 Intermédiaire',
-    advanced: '🔴 Avancé',
-  };
-
   return (
     <article
       className={`concept-card concept-card--${concept.color}`}
@@ -43,13 +37,6 @@ export const ConceptCard: React.FC<ConceptCardProps> = ({
 
         <h3 className="concept-card__title">{concept.title}</h3>
         <p className="concept-card__description">{concept.description}</p>
-
-        <div className="concept-card__meta">
-          <span className={`difficulty difficulty--${concept.difficulty}`}>
-            {difficultyLabel[concept.difficulty]}
-          </span>
-          <span className="concept-card__time">⏱️ {concept.estimatedTime}</span>
-        </div>
       </div>
 
       <div className="concept-card__hover-effect"></div>

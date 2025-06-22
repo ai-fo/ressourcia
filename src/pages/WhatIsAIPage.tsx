@@ -1,12 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PageLayout } from '../components/layout/PageLayout';
 import { StorySection } from '../features/storytelling/StorySection';
 import { InteractiveSection } from '../features/interactive/InteractiveSection';
 import { ExplanationSection } from '../features/explanations/ExplanationSection';
+import { useAuth } from '../contexts/AuthContext';
+import { useGamification } from '../contexts/GamificationContext';
 import './WhatIsAIPage.css';
 
 export const WhatIsAIPage = () => {
   const [userChoices, setUserChoices] = useState<string[]>([]);
+  const [hasCompleted, setHasCompleted] = useState(false);
+  const { user } = useAuth();
+  const { completeChapter, progress } = useGamification();
+
+  // Check if chapter is already completed
+  useEffect(() => {
+    const existingProgress = progress.find(
+      (p) => p.conceptSlug === 'what-is-ai'
+    );
+    if (existingProgress?.completed) {
+      setHasCompleted(true);
+    }
+  }, [progress]);
+
+  // Complete chapter when game is won
+  useEffect(() => {
+    const correctAnswers = userChoices.filter((c) =>
+      [
+        'face-unlock',
+        'auto-correct',
+        'game-ai',
+        'voice-commands',
+        'smart-speaker',
+        'recommendation',
+      ].includes(c)
+    ).length;
+
+    if (correctAnswers === 6 && user && !hasCompleted) {
+      const score = Math.round((correctAnswers / 6) * 100);
+      completeChapter('what-is-ai', score, 300); // 300 seconds estimated time
+      setHasCompleted(true);
+    }
+  }, [userChoices, user, hasCompleted, completeChapter]);
 
   const storyContent = {
     title: "L'histoire d'Alice et de son assistant magique",
@@ -242,9 +277,14 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                   'recommendation',
                 ].includes(c)
               ).length === 6 && (
-                <p className="success-message">
-                  🎉 Bravo ! Vous êtes un vrai détective de l'IA !
-                </p>
+                <div className="success-container">
+                  <p className="success-message">
+                    🎉 Bravo ! Vous êtes un vrai détective de l'IA !
+                  </p>
+                  {user && hasCompleted && (
+                    <p className="points-earned">+20 points gagnés ! 🌟</p>
+                  )}
+                </div>
               )}
             </div>
           </div>
