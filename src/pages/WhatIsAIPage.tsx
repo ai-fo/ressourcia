@@ -329,7 +329,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <InteractiveSection>
           <div className="ai-detective-game">
-            <h3>🕵️ Devenez détective de l'IA !</h3>
+            <h3>Devenez détective de l'IA !</h3>
             <p>
               Trouvez les IA cachées dans ces situations du quotidien. Cliquez
               sur tout ce qui utilise l'IA !
@@ -506,7 +506,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
         </InteractiveSection>
 
         <section className="history-section">
-          <h2 className="history-title">📚 L'Histoire Fascinante de l'IA</h2>
+          <h2 className="history-title">L'Histoire Fascinante de l'IA</h2>
 
           <div className="timeline">
             <div className="timeline-item">
@@ -611,7 +611,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <section className="technical-section">
           <h2 className="technical-title">
-            🔧 Pour les curieux : L'IA expliquée plus en profondeur
+            Pour les curieux : L'IA expliquée plus en profondeur
           </h2>
 
           <div className="technical-content">
@@ -748,7 +748,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
         <ExplanationSection explanation={explanationContent} />
 
         <section className="quiz-section">
-          <h3>🎯 Testez vos connaissances !</h3>
+          <h3>Testez vos connaissances !</h3>
           <p className="quiz-intro">
             Avant de continuer, voyons ce que vous avez retenu de cette page !
             {quizAlreadyCompleted && (
@@ -866,7 +866,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <section className="back-home-section">
           <div className="back-home-content">
-            <h3>🎯 Continuez votre exploration !</h3>
+            <h3>Continuez votre exploration !</h3>
             <p>
               Vous avez aimé découvrir l'IA ? Voici d'autres concepts
               passionnants qui vous attendent :
