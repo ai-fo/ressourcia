@@ -781,6 +781,25 @@
     margin: 0 0 0 40px;
     width: calc(100% - 40px);
   }
+
+  /* Portal responsive */
+  .liquid-portal {
+    width: 220px;
+    height: 220px;
+  }
+
+  .portal-title {
+    font-size: 1.2rem;
+  }
+
+  .portal-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .portal-icon svg {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* Section Quiz */
@@ -1033,109 +1052,189 @@
   border: 1px solid rgba(249, 115, 22, 0.4);
 }
 
-/* Section Retour à l'accueil */
+/* Section Retour à l'accueil - Design Liquid */
 .back-home-section {
   margin: var(--space-xl) auto;
-  max-width: 1200px;
-  padding: var(--space-md);
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
   position: relative;
-  background: rgba(30, 58, 138, 0.3);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  overflow: visible;
 }
 
-.back-home-content {
+.liquid-portal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.liquid-portal {
   position: relative;
-  z-index: 2;
+  width: 280px;
+  height: 280px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.back-home-section::before {
-  content: '';
+.liquid-portal:hover {
+  transform: scale(1.05);
+}
+
+.portal-liquid-bg {
   position: absolute;
+  inset: -20px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.portal-blob {
+  position: absolute;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(40px);
+  mix-blend-mode: screen;
+  animation: portal-morph 15s ease-in-out infinite;
+}
+
+.portal-blob-1 {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(249, 115, 22, 0.8) 0%, 
+    rgba(249, 115, 22, 0.4) 40%,
+    transparent 70%);
   top: 0;
   left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    var(--color-primary-blue-light) 0%, 
-    var(--color-primary-orange-light) 50%, 
-    var(--color-primary-blue-light) 100%);
-  background-size: 200% 100%;
-  animation: gradient-move 3s linear infinite;
+  animation-duration: 8s;
 }
 
-/* Bouton retour simplifié */
-
-.back-home-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-xl);
-  background: linear-gradient(135deg, 
-    var(--color-primary-orange) 0%, 
-    var(--color-primary-orange-light) 100%);
-  color: white;
-  border: none;
-  border-radius: var(--radius-full);
-  font-size: 1.2rem;
-  font-weight: 600;
-  font-family: 'Lexend', sans-serif;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
-  position: relative;
-  overflow: hidden;
+.portal-blob-2 {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 70%, 
+    rgba(59, 130, 246, 0.8) 0%, 
+    rgba(59, 130, 246, 0.4) 40%,
+    transparent 70%);
+  top: 0;
+  left: 0;
+  animation-duration: 10s;
+  animation-delay: -2s;
 }
 
-.back-home-btn::before {
-  content: '';
+.portal-blob-3 {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(139, 92, 246, 0.6) 0%, 
+    rgba(139, 92, 246, 0.3) 40%,
+    transparent 70%);
+  top: 0;
+  left: 0;
+  animation-duration: 12s;
+  animation-delay: -4s;
+}
+
+@keyframes portal-morph {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: rotate(180deg) scale(0.95);
+  }
+  75% {
+    border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%;
+    transform: rotate(270deg) scale(1.05);
+  }
+}
+
+.portal-content {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-.back-home-btn:hover::before {
-  width: 300px;
-  height: 300px;
+.liquid-portal:hover .portal-content {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.back-home-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.6);
+.portal-icon {
+  margin-bottom: var(--space-sm);
+  animation: portal-float 3s ease-in-out infinite;
 }
 
-.back-home-btn:active {
-  transform: translateY(-1px) scale(1.02);
+.portal-icon svg {
+  width: 48px;
+  height: 48px;
+  color: white;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
 }
 
-.btn-icon {
-  font-size: 1.5rem;
-  display: inline-block;
-  animation: home-bounce 2s ease-in-out infinite;
-}
-
-@keyframes home-bounce {
+@keyframes portal-float {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
 }
 
-.btn-text {
-  position: relative;
-  z-index: 1;
+.portal-title {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0 0 var(--space-xs) 0;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.portal-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.portal-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle, 
+    rgba(249, 115, 22, 0.2) 0%, 
+    rgba(59, 130, 246, 0.1) 40%,
+    transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.liquid-portal:hover .portal-glow {
+  opacity: 1;
+  animation: portal-pulse 2s ease-in-out infinite;
+}
+
+@keyframes portal-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
 }
 
 /* Formes flottantes décoratives */
