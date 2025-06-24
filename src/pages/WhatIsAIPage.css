@@ -826,6 +826,14 @@
   margin-bottom: var(--space-lg);
 }
 
+.quiz-already-done {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.9rem;
+  color: var(--color-primary-orange);
+  font-style: italic;
+}
+
 .quiz-container {
   max-width: 800px;
   margin: 0 auto;

@@ -229,7 +229,6 @@ export const ProfilePage: React.FC = () => {
               )}
             </div>
           </div>
-
         </div>
       </div>
     </PageLayout>

@@ -40,6 +40,14 @@ interface GamificationContextType {
     timeSpent?: number
   ) => Promise<void>;
   checkAndAwardBadges: () => Promise<void>;
+  checkActivityCompleted: (activityId: string) => Promise<boolean>;
+  completeActivity: (
+    activityId: string,
+    activityType: 'quiz' | 'game',
+    score?: number,
+    points?: number,
+    reason?: string
+  ) => Promise<boolean>;
 }
 
 const GamificationContext = createContext<GamificationContextType | undefined>(
@@ -74,7 +82,7 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
   const fetchUserStats = async () => {
     if (!user) return;
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('user_stats')
       .select('*')
       .eq('user_id', user.id)
@@ -87,6 +95,28 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
         streakDays: data.streak_days,
         lastActivityDate: data.last_activity_date,
       });
+    } else if (error?.code === 'PGRST116') {
+      // No stats found, create initial stats
+      console.log('Creating initial user stats for user:', user.id);
+      const { data: newStats, error: insertError } = await supabase
+        .from('user_stats')
+        .insert({
+          user_id: user.id,
+          points: 0,
+          level: 1,
+          streak_days: 0,
+        })
+        .select()
+        .single();
+
+      if (newStats && !insertError) {
+        setUserStats({
+          points: newStats.points,
+          level: newStats.level,
+          streakDays: newStats.streak_days,
+          lastActivityDate: newStats.last_activity_date,
+        });
+      }
     }
   };
 
@@ -146,10 +176,51 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
 
   // Add points to user
   const addPoints = async (points: number, reason?: string) => {
-    if (!user || !userStats) return;
+    console.log('addPoints called:', {
+      points,
+      reason,
+      user: !!user,
+      userStats: !!userStats,
+    });
 
-    const newPoints = userStats.points + points;
+    if (!user) {
+      console.log('addPoints: No user');
+      return;
+    }
+
+    // Si userStats n'est pas encore chargé, essayer de le récupérer
+    let currentStats = userStats;
+    if (!currentStats) {
+      console.log('addPoints: userStats not loaded, fetching...');
+      const { data } = await supabase
+        .from('user_stats')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (data) {
+        currentStats = {
+          points: data.points,
+          level: data.level,
+          streakDays: data.streak_days,
+          lastActivityDate: data.last_activity_date,
+        };
+        setUserStats(currentStats);
+      } else {
+        console.error('addPoints: Could not fetch user stats');
+        return;
+      }
+    }
+
+    const newPoints = currentStats.points + points;
     const newLevel = Math.floor(newPoints / 100) + 1;
+
+    console.log('addPoints: Adding points', {
+      points,
+      reason,
+      newPoints,
+      newLevel,
+    });
 
     // Update user stats
     const { error: statsError } = await supabase
@@ -164,23 +235,34 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
     if (!statsError) {
       // Add to achievements history if reason is provided
       if (reason) {
-        await supabase
+        const { data, error: historyError } = await supabase
           .from('achievements_history')
           .insert({
             user_id: user.id,
             points: points,
             reason: reason,
-          });
+          })
+          .select();
+
+        console.log('addPoints: History insert result', {
+          data,
+          error: historyError,
+        });
+
+        // Déclencher un événement pour forcer le rafraîchissement
+        window.dispatchEvent(new CustomEvent('achievementsUpdated'));
       }
 
       setUserStats({
-        ...userStats,
+        ...currentStats,
         points: newPoints,
         level: newLevel,
       });
-      
+
       // Check and award badges after points update
       await checkAndAwardBadges();
+    } else {
+      console.error('addPoints: Error updating stats', statsError);
     }
   };
 
@@ -335,6 +417,60 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
     }
   };
 
+  // Vérifier si une activité a déjà été complétée
+  const checkActivityCompleted = async (
+    activityId: string
+  ): Promise<boolean> => {
+    if (!user) return false;
+
+    const { data, error } = await supabase
+      .from('completed_activities')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('activity_id', activityId)
+      .single();
+
+    return !!data && !error;
+  };
+
+  // Compléter une activité (quiz ou jeu)
+  const completeActivity = async (
+    activityId: string,
+    activityType: 'quiz' | 'game',
+    score?: number,
+    points?: number,
+    reason?: string
+  ): Promise<boolean> => {
+    if (!user) return false;
+
+    // Vérifier si déjà complété
+    const alreadyCompleted = await checkActivityCompleted(activityId);
+    if (alreadyCompleted) {
+      console.log('Activity already completed:', activityId);
+      return false;
+    }
+
+    // Enregistrer l'activité comme complétée
+    const { error } = await supabase.from('completed_activities').insert({
+      user_id: user.id,
+      activity_id: activityId,
+      activity_type: activityType,
+      score: score,
+    });
+
+    if (error) {
+      console.error('Error recording completed activity:', error);
+      return false;
+    }
+
+    // Ajouter les points si spécifiés
+    if (points && reason) {
+      await addPoints(points, reason);
+    }
+
+    return true;
+  };
+
   const value = {
     userStats,
     badges,
@@ -344,6 +480,8 @@ export const GamificationProvider: React.FC<GamificationProviderProps> = ({
     addPoints,
     completeChapter,
     checkAndAwardBadges,
+    checkActivityCompleted,
+    completeActivity,
   };
 
   return (

@@ -18,26 +18,58 @@ interface AchievementHistory {
 export const AchievementsPage: React.FC = () => {
   const { user } = useAuth();
   const { userStats, progress, loading } = useGamification();
-  const [achievementsHistory, setAchievementsHistory] = useState<AchievementHistory[]>([]);
+  const [achievementsHistory, setAchievementsHistory] = useState<
+    AchievementHistory[]
+  >([]);
+
+  const fetchAchievementsHistory = async () => {
+    if (!user) return;
+
+    console.log('Fetching achievements history for user:', user.id);
+
+    const { data, error } = await supabase
+      .from('achievements_history')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('earned_at', { ascending: false })
+      .limit(10);
+
+    console.log('Achievements history result:', { data, error });
+
+    if (data && !error) {
+      setAchievementsHistory(data);
+    } else if (error) {
+      console.error('Error fetching achievements history:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchAchievementsHistory = async () => {
-      if (!user) return;
-
-      const { data, error } = await supabase
-        .from('achievements_history')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('earned_at', { ascending: false })
-        .limit(10);
-
-      if (data && !error) {
-        setAchievementsHistory(data);
-      }
-    };
-
     fetchAchievementsHistory();
   }, [user]);
+
+  // Rafraîchir l'historique quand userStats change (après ajout de points)
+  useEffect(() => {
+    if (userStats) {
+      fetchAchievementsHistory();
+    }
+  }, [userStats?.points]);
+
+  // Écouter l'événement personnalisé pour rafraîchir
+  useEffect(() => {
+    const handleAchievementsUpdate = () => {
+      console.log('Achievements updated event received');
+      fetchAchievementsHistory();
+    };
+
+    window.addEventListener('achievementsUpdated', handleAchievementsUpdate);
+
+    return () => {
+      window.removeEventListener(
+        'achievementsUpdated',
+        handleAchievementsUpdate
+      );
+    };
+  }, []);
 
   if (!user) {
     return <Navigate to="/login" />;
@@ -153,17 +185,22 @@ export const AchievementsPage: React.FC = () => {
             <div className="achievements-history">
               {achievementsHistory.map((achievement) => (
                 <div key={achievement.id} className="achievement-item">
-                  <div className="achievement-points">+{achievement.points}</div>
+                  <div className="achievement-points">
+                    +{achievement.points}
+                  </div>
                   <div className="achievement-details">
                     <p className="achievement-reason">{achievement.reason}</p>
                     <p className="achievement-date">
-                      {new Date(achievement.earned_at).toLocaleDateString('fr-FR', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
+                      {new Date(achievement.earned_at).toLocaleDateString(
+                        'fr-FR',
+                        {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        }
+                      )}
                     </p>
                   </div>
                 </div>

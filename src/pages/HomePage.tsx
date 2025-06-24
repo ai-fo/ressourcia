@@ -50,7 +50,7 @@ export const HomePage = () => {
 
     // Déclencher la transition
     setIsTransitioning(true);
-    
+
     setTimeout(() => {
       setSelectedDifficulty(difficulty);
       setIsTransitioning(false);
@@ -110,7 +110,9 @@ export const HomePage = () => {
       </header>
 
       <section className="filter-section">
-        <div className={`filter-buttons ${isTransitioning ? 'filter-changing' : ''}`}>
+        <div
+          className={`filter-buttons ${isTransitioning ? 'filter-changing' : ''}`}
+        >
           <button
             className={`filter-btn ${selectedDifficulty === 'all' ? 'active' : ''}`}
             onClick={(e) => handleFilterClick('all', e)}
@@ -139,7 +141,9 @@ export const HomePage = () => {
       </section>
 
       <main className="concepts-grid-container">
-        <div className={`concepts-grid ${isTransitioning ? 'transitioning' : ''}`}>
+        <div
+          className={`concepts-grid ${isTransitioning ? 'transitioning' : ''}`}
+        >
           {filteredConcepts.map((concept) => (
             <ConceptCard
               key={concept.id}

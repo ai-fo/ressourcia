@@ -16,9 +16,15 @@ export const WhatIsAIPage = () => {
   const [showQuizFeedback, setShowQuizFeedback] = useState(false);
   const [quizScore, setQuizScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizAlreadyCompleted, setQuizAlreadyCompleted] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { completeChapter, progress, addPoints } = useGamification();
+  const {
+    completeChapter,
+    progress,
+    completeActivity,
+    checkActivityCompleted,
+  } = useGamification();
 
   // Check if chapter is already completed
   useEffect(() => {
@@ -29,6 +35,17 @@ export const WhatIsAIPage = () => {
       setHasCompleted(true);
     }
   }, [progress]);
+
+  // Check if quiz is already completed
+  useEffect(() => {
+    const checkQuizStatus = async () => {
+      if (user) {
+        const completed = await checkActivityCompleted('what-is-ai-quiz');
+        setQuizAlreadyCompleted(completed);
+      }
+    };
+    checkQuizStatus();
+  }, [user, checkActivityCompleted]);
 
   // Complete chapter when game is won
   useEffect(() => {
@@ -45,10 +62,21 @@ export const WhatIsAIPage = () => {
 
     if (correctAnswers === 6 && user && !hasCompleted) {
       const score = Math.round((correctAnswers / 6) * 100);
+
+      // Compléter le chapitre
       completeChapter('what-is-ai', score, 300); // 300 seconds estimated time
       setHasCompleted(true);
+
+      // Compléter le jeu pour les points bonus
+      completeActivity(
+        'what-is-ai-detective-game',
+        'game',
+        score,
+        20,
+        'Jeu du détective IA complété avec succès'
+      );
     }
-  }, [userChoices, user, hasCompleted, completeChapter]);
+  }, [userChoices, user, hasCompleted, completeChapter, completeActivity]);
 
   const storyContent = {
     title: "L'histoire d'Alice et de son assistant magique",
@@ -124,50 +152,55 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
   const quizQuestions = [
     {
-      question: "Selon l'histoire d'Alice, qu'est-ce qu'ALBERT a appris à faire ?",
+      question:
+        "Selon l'histoire d'Alice, qu'est-ce qu'ALBERT a appris à faire ?",
       options: [
-        "Réparer des objets cassés",
+        'Réparer des objets cassés',
         "Retrouver le tournevis d'Alice selon ses habitudes",
         "Ranger automatiquement l'atelier",
-        "Construire d'autres robots"
+        "Construire d'autres robots",
       ],
       correct: 1,
-      explanation: "ALBERT a appris à comprendre les habitudes d'Alice et à prédire où elle rangeait son tournevis selon le jour de la semaine."
+      explanation:
+        "ALBERT a appris à comprendre les habitudes d'Alice et à prédire où elle rangeait son tournevis selon le jour de la semaine.",
     },
     {
       question: "Quel test permet de savoir si une machine peut 'penser' ?",
       options: [
-        "Le test de QI",
+        'Le test de QI',
         "Le test d'intelligence émotionnelle",
-        "Le test de Turing",
-        "Le test de performance"
+        'Le test de Turing',
+        'Le test de performance',
       ],
       correct: 2,
-      explanation: "Le test de Turing, proposé en 1950, vérifie si une machine peut avoir une conversation si naturelle qu'on ne peut pas la distinguer d'un humain."
+      explanation:
+        "Le test de Turing, proposé en 1950, vérifie si une machine peut avoir une conversation si naturelle qu'on ne peut pas la distinguer d'un humain.",
     },
     {
-      question: "Parmi ces éléments de votre quotidien, lequel N'utilise PAS l'IA ?",
+      question:
+        "Parmi ces éléments de votre quotidien, lequel N'utilise PAS l'IA ?",
       options: [
-        "La correction automatique du téléphone",
-        "Les suggestions Netflix",
-        "Une calculatrice basique",
-        "Le déverrouillage facial"
+        'La correction automatique du téléphone',
+        'Les suggestions Netflix',
+        'Une calculatrice basique',
+        'Le déverrouillage facial',
       ],
       correct: 2,
-      explanation: "Une calculatrice basique suit des règles mathématiques fixes, elle n'apprend pas de patterns comme le fait l'IA."
-    }
+      explanation:
+        "Une calculatrice basique suit des règles mathématiques fixes, elle n'apprend pas de patterns comme le fait l'IA.",
+    },
   ];
 
   const handleQuizAnswer = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
     setShowQuizFeedback(true);
-    
+
     if (answerIndex === quizQuestions[currentQuestion].correct) {
-      setQuizScore(prev => prev + 1);
+      setQuizScore((prev) => prev + 1);
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentQuestion < 2) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
@@ -175,16 +208,22 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
     } else {
       // Quiz terminé
       setQuizCompleted(true);
-      
+
+      // Calculer le score final avant d'attribuer les points
+      const isLastAnswerCorrect =
+        selectedAnswer === quizQuestions[currentQuestion].correct;
+      const finalScore = isLastAnswerCorrect ? quizScore + 1 : quizScore;
+
+      // Mettre à jour le score final pour l'affichage
+      if (isLastAnswerCorrect) {
+        setQuizScore((prev) => prev + 1);
+      }
+
       // Attribuer les points selon le score final
       if (user) {
-        const finalScore = selectedAnswer === quizQuestions[currentQuestion].correct 
-          ? quizScore + 1 
-          : quizScore;
-          
         let points = 50;
         let reason = 'Quiz complété sur "Qu\'est-ce que l\'IA ?"';
-        
+
         if (finalScore === 3) {
           points = 200;
           reason = 'Quiz parfait sur "Qu\'est-ce que l\'IA ?"';
@@ -192,8 +231,33 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
           points = 100;
           reason = 'Quiz réussi sur "Qu\'est-ce que l\'IA ?"';
         }
-        
-        addPoints(points, reason);
+
+        console.log('Quiz completed, adding points:', {
+          finalScore,
+          points,
+          reason,
+        });
+
+        // Petit délai pour s'assurer que le contexte est bien chargé
+        setTimeout(async () => {
+          try {
+            const success = await completeActivity(
+              'what-is-ai-quiz',
+              'quiz',
+              finalScore,
+              points,
+              reason
+            );
+
+            if (success) {
+              console.log('Quiz activity completed successfully');
+            } else {
+              console.log('Quiz already completed before');
+            }
+          } catch (error) {
+            console.error('Error completing quiz activity:', error);
+          }
+        }, 100);
       }
     }
   };
@@ -619,6 +683,12 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
           <h3>🎯 Testez vos connaissances !</h3>
           <p className="quiz-intro">
             Avant de continuer, voyons ce que vous avez retenu de cette page !
+            {quizAlreadyCompleted && (
+              <span className="quiz-already-done">
+                {' '}
+                (Déjà complété - Les points ne seront pas ajoutés à nouveau)
+              </span>
+            )}
           </p>
 
           <div className="quiz-container">
@@ -627,42 +697,59 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                 <div className="quiz-question">
                   <h4>Question {currentQuestion + 1}/3</h4>
                   <p>{quizQuestions[currentQuestion].question}</p>
-                  
+
                   <div className="quiz-options">
-                    {quizQuestions[currentQuestion].options.map((option, index) => (
-                      <button
-                        key={index}
-                        className={`quiz-option ${
-                          selectedAnswer === index ? 'selected' : ''
-                        } ${
-                          showQuizFeedback && index === quizQuestions[currentQuestion].correct
-                            ? 'correct'
-                            : ''
-                        } ${
-                          showQuizFeedback && selectedAnswer === index && index !== quizQuestions[currentQuestion].correct
-                            ? 'incorrect'
-                            : ''
-                        }`}
-                        onClick={() => handleQuizAnswer(index)}
-                        disabled={showQuizFeedback}
-                      >
-                        {option}
-                      </button>
-                    ))}
+                    {quizQuestions[currentQuestion].options.map(
+                      (option, index) => (
+                        <button
+                          key={index}
+                          className={`quiz-option ${
+                            selectedAnswer === index ? 'selected' : ''
+                          } ${
+                            showQuizFeedback &&
+                            index === quizQuestions[currentQuestion].correct
+                              ? 'correct'
+                              : ''
+                          } ${
+                            showQuizFeedback &&
+                            selectedAnswer === index &&
+                            index !== quizQuestions[currentQuestion].correct
+                              ? 'incorrect'
+                              : ''
+                          }`}
+                          onClick={() => handleQuizAnswer(index)}
+                          disabled={showQuizFeedback}
+                        >
+                          {option}
+                        </button>
+                      )
+                    )}
                   </div>
 
                   {showQuizFeedback && (
                     <div className="quiz-feedback">
-                      <p className={selectedAnswer === quizQuestions[currentQuestion].correct ? 'correct-feedback' : 'incorrect-feedback'}>
-                        {selectedAnswer === quizQuestions[currentQuestion].correct
-                          ? '✅ Bravo ! ' + quizQuestions[currentQuestion].explanation
-                          : '❌ Pas tout à fait. ' + quizQuestions[currentQuestion].explanation}
+                      <p
+                        className={
+                          selectedAnswer ===
+                          quizQuestions[currentQuestion].correct
+                            ? 'correct-feedback'
+                            : 'incorrect-feedback'
+                        }
+                      >
+                        {selectedAnswer ===
+                        quizQuestions[currentQuestion].correct
+                          ? '✅ Bravo ! ' +
+                            quizQuestions[currentQuestion].explanation
+                          : '❌ Pas tout à fait. ' +
+                            quizQuestions[currentQuestion].explanation}
                       </p>
                       <button
                         className="quiz-next-btn"
                         onClick={handleNextQuestion}
                       >
-                        {currentQuestion < 2 ? 'Question suivante' : 'Voir les résultats'}
+                        {currentQuestion < 2
+                          ? 'Question suivante'
+                          : 'Voir les résultats'}
                       </button>
                     </div>
                   )}
@@ -670,7 +757,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
                 <div className="quiz-progress">
                   <div className="quiz-progress-bar">
-                    <div 
+                    <div
                       className="quiz-progress-fill"
                       style={{ width: `${((currentQuestion + 1) / 3) * 100}%` }}
                     ></div>
@@ -686,22 +773,26 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                 </p>
                 {quizScore === 3 && (
                   <p className="quiz-perfect">
-                    Parfait ! Vous avez tout compris ! +200 points bonus 🌟
+                    Parfait ! Vous avez tout compris !
+                    {!quizAlreadyCompleted && ' +200 points bonus 🌟'}
                   </p>
                 )}
                 {quizScore === 2 && (
                   <p className="quiz-good">
-                    Très bien ! Vous avez bien suivi ! +100 points bonus ⭐
+                    Très bien ! Vous avez bien suivi !
+                    {!quizAlreadyCompleted && ' +100 points bonus ⭐'}
                   </p>
                 )}
                 {quizScore === 1 && (
                   <p className="quiz-encourage">
-                    Pas mal ! N'hésitez pas à relire certaines sections. +50 points 💫
+                    Pas mal ! N'hésitez pas à relire certaines sections.
+                    {!quizAlreadyCompleted && ' +50 points 💫'}
                   </p>
                 )}
                 {quizScore === 0 && (
                   <p className="quiz-encourage">
-                    Ce n'est qu'un début ! Relisez la page et réessayez. +50 points 💫
+                    Ce n'est qu'un début ! Relisez la page et réessayez.
+                    {!quizAlreadyCompleted && ' +50 points 💫'}
                   </p>
                 )}
               </div>
@@ -713,11 +804,12 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
           <div className="back-home-content">
             <h3>🎯 Continuez votre exploration !</h3>
             <p>
-              Vous avez aimé découvrir l'IA ? Voici d'autres concepts passionnants qui vous attendent :
+              Vous avez aimé découvrir l'IA ? Voici d'autres concepts
+              passionnants qui vous attendent :
             </p>
-            
+
             <div className="suggested-concepts">
-              <div 
+              <div
                 className="suggested-card"
                 onClick={() => navigate('/concept/machine-learning')}
                 role="button"
@@ -732,7 +824,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                 <h4>Machine Learning</h4>
                 <p>Comment les machines apprennent-elles vraiment ?</p>
               </div>
-              <div 
+              <div
                 className="suggested-card"
                 onClick={() => navigate('/concept/neural-networks')}
                 role="button"
@@ -747,7 +839,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                 <h4>Réseaux de neurones</h4>
                 <p>Le cerveau artificiel décrypté simplement</p>
               </div>
-              <div 
+              <div
                 className="suggested-card"
                 onClick={() => navigate('/concept/chatgpt-llm')}
                 role="button"
@@ -764,10 +856,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
               </div>
             </div>
 
-            <button
-              className="back-home-btn"
-              onClick={() => navigate('/home')}
-            >
+            <button className="back-home-btn" onClick={() => navigate('/home')}>
               <span className="btn-icon">🚀</span>
               <span className="btn-text">Explorer tous les concepts</span>
             </button>
