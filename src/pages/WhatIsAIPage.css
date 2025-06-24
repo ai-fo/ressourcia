@@ -475,13 +475,29 @@
 
 .timeline-item {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   display: grid;
-  grid-template-columns: 1fr 140px 1fr;
+  grid-template-columns: 1fr 120px 1fr;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   animation: timeline-appear 0.6s ease-out;
   animation-fill-mode: both;
+}
+
+/* Point sur la ligne centrale */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--color-primary-orange);
+  border: 3px solid rgba(15, 23, 42, 0.9);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -551,6 +567,7 @@
   transition: all var(--transition-fast);
 }
 
+
 .timeline-date:hover {
   transform: scale(1.1) translateY(-2px);
   box-shadow: 
@@ -559,20 +576,7 @@
 }
 
 .timeline-date::after {
-  content: '';
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: white;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 
-    0 0 0 6px var(--color-primary-orange),
-    0 0 0 12px rgba(249, 115, 22, 0.3),
-    0 0 20px rgba(249, 115, 22, 0.5);
-  z-index: -2;
+  display: none;
 }
 
 @keyframes date-pulse {
@@ -643,13 +647,12 @@
   animation: date-future-pulse 3s ease-in-out infinite;
 }
 
-.timeline-item-future .timeline-date::after {
-  background: white;
-  box-shadow: 
-    0 0 0 6px var(--color-primary-blue),
-    0 0 0 12px rgba(59, 130, 246, 0.3),
-    0 0 20px rgba(59, 130, 246, 0.5);
+.timeline-item-future::after {
+  background: var(--color-primary-blue);
+  border-color: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
+
 
 @keyframes date-future-pulse {
   0%, 100% {
@@ -852,9 +855,8 @@
     display: none;
   }
   
-  .timeline-date::after {
-    width: 16px;
-    height: 16px;
+  .timeline-item::after {
+    display: none;
   }
 
   .timeline-content {
