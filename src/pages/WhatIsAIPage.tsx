@@ -191,11 +191,42 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
     },
   ];
 
+  // Fonction pour mélanger un tableau
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // État pour stocker les options mélangées et l'index de la bonne réponse
+  const [shuffledOptions, setShuffledOptions] = useState<{
+    options: string[];
+    correctIndex: number;
+  }>({ options: [], correctIndex: 0 });
+
+  // Mélanger les options quand on change de question
+  useEffect(() => {
+    if (quizQuestions[currentQuestion]) {
+      const question = quizQuestions[currentQuestion];
+      const correctAnswer = question.options[question.correct];
+      const shuffled = shuffleArray(question.options);
+      const newCorrectIndex = shuffled.indexOf(correctAnswer);
+
+      setShuffledOptions({
+        options: shuffled,
+        correctIndex: newCorrectIndex,
+      });
+    }
+  }, [currentQuestion]);
+
   const handleQuizAnswer = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
     setShowQuizFeedback(true);
 
-    if (answerIndex === quizQuestions[currentQuestion].correct) {
+    if (answerIndex === shuffledOptions.correctIndex) {
       setQuizScore((prev) => prev + 1);
     }
   };
@@ -211,7 +242,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
       // Calculer le score final avant d'attribuer les points
       const isLastAnswerCorrect =
-        selectedAnswer === quizQuestions[currentQuestion].correct;
+        selectedAnswer === shuffledOptions.correctIndex;
       const finalScore = isLastAnswerCorrect ? quizScore + 1 : quizScore;
 
       // Mettre à jour le score final pour l'affichage
@@ -699,45 +730,41 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                   <p>{quizQuestions[currentQuestion].question}</p>
 
                   <div className="quiz-options">
-                    {quizQuestions[currentQuestion].options.map(
-                      (option, index) => (
-                        <button
-                          key={index}
-                          className={`quiz-option ${
-                            selectedAnswer === index ? 'selected' : ''
-                          } ${
-                            showQuizFeedback &&
-                            index === quizQuestions[currentQuestion].correct
-                              ? 'correct'
-                              : ''
-                          } ${
-                            showQuizFeedback &&
-                            selectedAnswer === index &&
-                            index !== quizQuestions[currentQuestion].correct
-                              ? 'incorrect'
-                              : ''
-                          }`}
-                          onClick={() => handleQuizAnswer(index)}
-                          disabled={showQuizFeedback}
-                        >
-                          {option}
-                        </button>
-                      )
-                    )}
+                    {shuffledOptions.options.map((option, index) => (
+                      <button
+                        key={option}
+                        className={`quiz-option ${
+                          selectedAnswer === index ? 'selected' : ''
+                        } ${
+                          showQuizFeedback &&
+                          index === shuffledOptions.correctIndex
+                            ? 'correct'
+                            : ''
+                        } ${
+                          showQuizFeedback &&
+                          selectedAnswer === index &&
+                          index !== shuffledOptions.correctIndex
+                            ? 'incorrect'
+                            : ''
+                        }`}
+                        onClick={() => handleQuizAnswer(index)}
+                        disabled={showQuizFeedback}
+                      >
+                        {option}
+                      </button>
+                    ))}
                   </div>
 
                   {showQuizFeedback && (
                     <div className="quiz-feedback">
                       <p
                         className={
-                          selectedAnswer ===
-                          quizQuestions[currentQuestion].correct
+                          selectedAnswer === shuffledOptions.correctIndex
                             ? 'correct-feedback'
                             : 'incorrect-feedback'
                         }
                       >
-                        {selectedAnswer ===
-                        quizQuestions[currentQuestion].correct
+                        {selectedAnswer === shuffledOptions.correctIndex
                           ? '✅ Bravo ! ' +
                             quizQuestions[currentQuestion].explanation
                           : '❌ Pas tout à fait. ' +
