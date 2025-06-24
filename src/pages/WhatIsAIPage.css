@@ -1037,7 +1037,7 @@
 .back-home-section {
   margin: var(--space-xl) auto;
   max-width: 1200px;
-  padding: var(--space-xl);
+  padding: var(--space-md);
   text-align: center;
   position: relative;
   background: rgba(30, 58, 138, 0.3);
@@ -1068,76 +1068,7 @@
   animation: gradient-move 3s linear infinite;
 }
 
-.back-home-section h3 {
-  font-size: 2.5rem;
-  color: var(--color-primary-orange-lighter);
-  margin-bottom: var(--space-md);
-  font-family: 'Quicksand', sans-serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  font-weight: 700;
-}
-
-.back-home-section p {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-lg);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Cartes de suggestions */
-.suggested-concepts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.suggested-card {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  transition: all var(--transition-base);
-  cursor: pointer;
-}
-
-.suggested-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  background: rgba(30, 58, 138, 0.4);
-}
-
-.suggested-card:focus {
-  outline: 3px solid var(--color-primary-blue-light);
-  outline-offset: 2px;
-}
-
-.suggested-icon {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
-.suggested-card h4 {
-  color: var(--color-primary-blue-lighter);
-  font-size: 1.2rem;
-  margin-bottom: var(--space-xs);
-  font-weight: 600;
-}
-
-.suggested-card p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  margin: 0;
-  text-shadow: none;
-}
+/* Bouton retour simplifié */
 
 .back-home-btn {
   display: inline-flex;
