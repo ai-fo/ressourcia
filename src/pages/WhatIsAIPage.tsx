@@ -57,11 +57,13 @@ export const WhatIsAIPage = () => {
         'voice-commands',
         'smart-speaker',
         'recommendation',
+        'gps-navigation',
+        'parking-assist',
       ].includes(c)
     ).length;
 
-    if (correctAnswers === 6 && user && !hasCompleted) {
-      const score = Math.round((correctAnswers / 6) * 100);
+    if (correctAnswers === 8 && user && !hasCompleted) {
+      const score = Math.round((correctAnswers / 8) * 100);
 
       // Compléter le chapitre
       completeChapter('what-is-ai', score, 300); // 300 seconds estimated time
@@ -426,6 +428,37 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                   </button>
                 </div>
               </div>
+
+              <div className="scenario-card">
+                <div className="scenario-image">🚗</div>
+                <h4>La Voiture de Lucas</h4>
+                <div className="clickable-items">
+                  <button
+                    className={`item-btn ${userChoices.includes('gps-navigation') ? 'found' : ''}`}
+                    onClick={() => handleGameChoice('gps-navigation')}
+                  >
+                    🗺️ GPS intelligent
+                  </button>
+                  <button
+                    className={`item-btn ${userChoices.includes('windshield-wipers') ? 'wrong' : ''}`}
+                    onClick={() => handleGameChoice('windshield-wipers')}
+                  >
+                    🌧️ Essuie-glaces
+                  </button>
+                  <button
+                    className={`item-btn ${userChoices.includes('parking-assist') ? 'found' : ''}`}
+                    onClick={() => handleGameChoice('parking-assist')}
+                  >
+                    🅿️ Aide au stationnement
+                  </button>
+                  <button
+                    className={`item-btn ${userChoices.includes('seat-belt') ? 'wrong' : ''}`}
+                    onClick={() => handleGameChoice('seat-belt')}
+                  >
+                    🔒 Ceinture de sécurité
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div className="game-score">
@@ -440,10 +473,12 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                       'voice-commands',
                       'smart-speaker',
                       'recommendation',
+                      'gps-navigation',
+                      'parking-assist',
                     ].includes(c)
                   ).length
                 }{' '}
-                IA sur 6 !
+                IA sur 8 !
               </p>
               {userChoices.filter((c) =>
                 [
@@ -453,8 +488,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
                   'voice-commands',
                   'smart-speaker',
                   'recommendation',
+                  'gps-navigation',
+                  'parking-assist',
                 ].includes(c)
-              ).length === 6 && (
+              ).length === 8 && (
                 <div className="success-container">
                   <p className="success-message">
                     🎉 Bravo ! Vous êtes un vrai détective de l'IA !
