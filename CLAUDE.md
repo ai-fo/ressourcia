@@ -50,6 +50,102 @@ Chaque page suit ce modèle:
 2. **Élément Interactif**: Mini-jeu ou visualisation interactive
 3. **Explications Détaillées**: Contenu approfondi avec exemples
 
+## Structure Obligatoire des Pages de Concepts
+
+Chaque page qui explique un concept IA DOIT contenir ces éléments essentiels :
+
+### 1. Hero Section avec Storytelling (OBLIGATOIRE)
+- **Histoire captivante** : Débuter avec une histoire qui humanise le concept
+- **Format narratif** : Utiliser des personnages, des situations concrètes
+- **Fait marquant** : Inclure un "Le saviez-vous ?" avec une anecdote historique ou fun fact
+- **Exemple** : L'histoire d'Alice et ALBERT pour expliquer l'apprentissage automatique
+
+### 2. Mini-jeu Interactif (OBLIGATOIRE)
+- **Engagement actif** : Le jeu doit permettre de comprendre le concept en pratiquant
+- **Feedback immédiat** : Animations visuelles pour les bonnes/mauvaises réponses
+- **Gamification** : Attribution de points et tracking de progression
+- **Types de jeux suggérés** :
+  - Jeu de détective (trouver des exemples cachés)
+  - Simulation interactive
+  - Puzzle ou association
+  - Classification d'éléments
+
+### 3. Section Histoire/Timeline (RECOMMANDÉ)
+- **Évolution chronologique** : Montrer comment le concept a évolué
+- **Design visuel** : Timeline avec dates centrées et alternance gauche/droite
+- **Points clés** : 6-8 événements marquants maximum
+- **Futur** : Toujours terminer par une vision du futur
+
+### 4. Quiz de Validation (OBLIGATOIRE)
+- **Minimum 3 questions** : Couvrant les points essentiels
+- **Mélange des options** : Randomiser l'ordre des réponses
+- **Feedback pédagogique** : Expliquer pourquoi la réponse est correcte/incorrecte
+- **Système de points** :
+  - 3/3 : 200 points bonus
+  - 2/3 : 100 points bonus
+  - 1/3 ou 0/3 : 50 points bonus
+- **Tracking** : Vérifier si déjà complété pour éviter le farming de points
+
+### 5. Bouton Retour à l'Accueil (OBLIGATOIRE)
+- **Design liquid spectaculaire** : Portal avec effet morphing
+- **Position** : En fin de page, section dédiée
+- **Animation** : Blobs flottants et effet de hover
+- **Texte** : "Retour à l'accueil" + "Explorez d'autres concepts"
+
+### Structure de Code Recommandée
+
+```typescript
+export const ConceptPage = () => {
+  // États pour le jeu
+  const [gameScore, setGameScore] = useState(0);
+  const [hasCompletedGame, setHasCompletedGame] = useState(false);
+  
+  // États pour le quiz
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizScore, setQuizScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  
+  // Gamification
+  const { completeChapter, completeActivity } = useGamification();
+  
+  // Structure des sections
+  return (
+    <PageLayout>
+      {/* 1. Hero avec image */}
+      <header className="page-hero">...</header>
+      
+      {/* 2. Histoire Storytelling */}
+      <StorySection story={storyContent} />
+      
+      {/* 3. Jeu Interactif */}
+      <InteractiveSection>
+        {/* Mini-jeu spécifique au concept */}
+      </InteractiveSection>
+      
+      {/* 4. Timeline (optionnel mais recommandé) */}
+      <section className="history-section">...</section>
+      
+      {/* 5. Explications détaillées */}
+      <ExplanationSection explanation={explanationContent} />
+      
+      {/* 6. Quiz obligatoire */}
+      <section className="quiz-section">...</section>
+      
+      {/* 7. Retour accueil */}
+      <section className="back-home-section">
+        <div className="liquid-portal-container">...</div>
+      </section>
+    </PageLayout>
+  );
+};
+```
+
+### Points d'Attention
+- **Cohérence visuelle** : Utiliser les mêmes animations liquid/morphing
+- **Responsive** : Adapter tous les éléments pour mobile
+- **Performance** : Lazy loading des sections lourdes
+- **Accessibilité** : ARIA labels sur tous les éléments interactifs
+
 ## Commandes
 
 ### Développement
