@@ -512,7 +512,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1950</div>
               <div className="timeline-content">
-                <h3>Le Test de Turing</h3>
+                <h3>
+                  Le Test de Turing
+                  <span className="timeline-year"> • 1950</span>
+                </h3>
                 <p>
                   Alan Turing imagine un test simple : si une machine peut
                   discuter avec toi sans que tu devines que c'est une machine,
@@ -524,7 +527,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1956</div>
               <div className="timeline-content">
-                <h3>Naissance de l'IA</h3>
+                <h3>
+                  Naissance de l'IA
+                  <span className="timeline-year"> • 1956</span>
+                </h3>
                 <p>
                   Des scientifiques se réunissent à Dartmouth et décident : "On
                   va créer des machines intelligentes !" Spoiler : c'était plus
@@ -536,7 +542,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1966</div>
               <div className="timeline-content">
-                <h3>ELIZA, la première psy robot</h3>
+                <h3>
+                  ELIZA, la première psy robot
+                  <span className="timeline-year"> • 1966</span>
+                </h3>
                 <p>
                   Un programme qui fait semblant d'être psychologue. Les gens
                   lui racontent leur vie ! Preuve que les humains veulent
@@ -548,7 +557,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1997</div>
               <div className="timeline-content">
-                <h3>Deep Blue bat Kasparov</h3>
+                <h3>
+                  Deep Blue bat Kasparov
+                  <span className="timeline-year"> • 1997</span>
+                </h3>
                 <p>
                   Pour la première fois, un ordinateur bat le champion du monde
                   d'échecs ! Les humains commencent à se dire : "Oups, elles
@@ -560,7 +572,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2011</div>
               <div className="timeline-content">
-                <h3>Siri dit "Bonjour !"</h3>
+                <h3>
+                  Siri dit "Bonjour !"
+                  <span className="timeline-year"> • 2011</span>
+                </h3>
                 <p>
                   Apple lance Siri et soudain, tout le monde parle à son
                   téléphone. "Dis Siri, raconte-moi une blague !" devient la
@@ -572,7 +587,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2016</div>
               <div className="timeline-content">
-                <h3>AlphaGo, maître du Go</h3>
+                <h3>
+                  AlphaGo, maître du Go
+                  <span className="timeline-year"> • 2016</span>
+                </h3>
                 <p>
                   L'IA de Google bat le champion du monde de Go, un jeu si
                   complexe qu'on pensait qu'aucune machine ne pourrait y jouer.
@@ -585,7 +603,9 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2022</div>
               <div className="timeline-content">
-                <h3>ChatGPT débarque</h3>
+                <h3>
+                  ChatGPT débarque<span className="timeline-year"> • 2022</span>
+                </h3>
                 <p>
                   OpenAI lance ChatGPT et c'est la folie ! Tout le monde lui
                   demande de faire ses devoirs, d'écrire des poèmes, ou juste de
@@ -597,7 +617,9 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item timeline-item-future">
               <div className="timeline-date">Futur</div>
               <div className="timeline-content">
-                <h3>Et maintenant ?</h3>
+                <h3>
+                  Et maintenant ?<span className="timeline-year"> • Futur</span>
+                </h3>
                 <p>
                   L'IA continue d'évoluer ! Qui sait, peut-être qu'un jour elle
                   nous aidera à explorer l'espace, soigner toutes les maladies,
