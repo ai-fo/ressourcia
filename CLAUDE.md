@@ -57,24 +57,18 @@ Chaque page qui explique un concept IA DOIT contenir ces éléments essentiels :
 ### 1. Hero Section avec Storytelling (OBLIGATOIRE)
 - **Histoire captivante** : Débuter avec une histoire qui humanise le concept
 - **Format narratif** : Utiliser des personnages, des situations concrètes
-- **Fait marquant** : Inclure un "Le saviez-vous ?" avec une anecdote historique ou fun fact
 - **Exemple** : L'histoire d'Alice et ALBERT pour expliquer l'apprentissage automatique
 
 ### 2. Mini-jeu Interactif (OBLIGATOIRE)
 - **Engagement actif** : Le jeu doit permettre de comprendre le concept en pratiquant
 - **Feedback immédiat** : Animations visuelles pour les bonnes/mauvaises réponses
 - **Gamification** : Attribution de points et tracking de progression
-- **Types de jeux suggérés** :
-  - Jeu de détective (trouver des exemples cachés)
-  - Simulation interactive
-  - Puzzle ou association
-  - Classification d'éléments
+- **Liberté créative** : Le jeu peut être graphique, textuel, simulation, puzzle, etc.
 
-### 3. Section Histoire/Timeline (RECOMMANDÉ)
-- **Évolution chronologique** : Montrer comment le concept a évolué
+### 3. Section Histoire/Timeline (OPTIONNEL)
+- **Utiliser quand pertinent** : Seulement si l'évolution historique apporte de la valeur
 - **Design visuel** : Timeline avec dates centrées et alternance gauche/droite
 - **Points clés** : 6-8 événements marquants maximum
-- **Futur** : Toujours terminer par une vision du futur
 
 ### 4. Quiz de Validation (OBLIGATOIRE)
 - **Minimum 3 questions** : Couvrant les points essentiels
@@ -122,8 +116,8 @@ export const ConceptPage = () => {
         {/* Mini-jeu spécifique au concept */}
       </InteractiveSection>
       
-      {/* 4. Timeline (optionnel mais recommandé) */}
-      <section className="history-section">...</section>
+      {/* 4. Timeline (optionnel - si pertinent) */}
+      {/* <section className="history-section">...</section> */}
       
       {/* 5. Explications détaillées */}
       <ExplanationSection explanation={explanationContent} />
