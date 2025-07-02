@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LiquidBackground } from '../components/common/LiquidBackground';
 import './IntroPage.css';
 
 export const IntroPage: React.FC = () => {
@@ -97,9 +98,7 @@ export const IntroPage: React.FC = () => {
 
   return (
     <div className="intro-page">
-      {/* Liquid blobs background */}
-      <div className="intro-liquid-blob intro-liquid-blob-1"></div>
-      <div className="intro-liquid-blob intro-liquid-blob-2"></div>
+      <LiquidBackground variant="default" />
 
       <canvas ref={canvasRef} className="sparkles-canvas" />
 
