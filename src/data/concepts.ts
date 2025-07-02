@@ -28,6 +28,7 @@ export const aiConcepts: AIConcept[] = [
     description:
       "C'est comme apprendre à ton chat à faire le café : tu lui montres 1000 fois, et peut-être qu'un jour il comprendra (spoiler : l'IA apprend plus vite).",
     slug: 'machine-learning-basics',
+    imageUrl: '/images/concepts/machinelearning.png',
     color: 'orange',
     difficulty: 'beginner',
     estimatedTime: '15 min',

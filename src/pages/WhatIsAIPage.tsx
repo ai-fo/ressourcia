@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PageLayout } from '../components/layout/PageLayout';
 import { StorySection } from '../features/storytelling/StorySection';
 import { InteractiveSection } from '../features/interactive/InteractiveSection';
 import { ExplanationSection } from '../features/explanations/ExplanationSection';
+import { BackHomePortal } from '../components/ui/BackHomePortal';
 import { useAuth } from '../contexts/AuthContext';
 import { useGamification } from '../contexts/GamificationContext';
 import './WhatIsAIPage.css';
@@ -11,20 +11,8 @@ import './WhatIsAIPage.css';
 export const WhatIsAIPage = () => {
   const [userChoices, setUserChoices] = useState<string[]>([]);
   const [hasCompleted, setHasCompleted] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [showQuizFeedback, setShowQuizFeedback] = useState(false);
-  const [quizScore, setQuizScore] = useState(0);
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [quizAlreadyCompleted, setQuizAlreadyCompleted] = useState(false);
-  const navigate = useNavigate();
   const { user } = useAuth();
-  const {
-    completeChapter,
-    progress,
-    completeActivity,
-    checkActivityCompleted,
-  } = useGamification();
+  const { completeChapter, progress, completeActivity } = useGamification();
 
   // Check if chapter is already completed
   useEffect(() => {
@@ -35,17 +23,6 @@ export const WhatIsAIPage = () => {
       setHasCompleted(true);
     }
   }, [progress]);
-
-  // Check if quiz is already completed
-  useEffect(() => {
-    const checkQuizStatus = async () => {
-      if (user) {
-        const completed = await checkActivityCompleted('what-is-ai-quiz');
-        setQuizAlreadyCompleted(completed);
-      }
-    };
-    checkQuizStatus();
-  }, [user, checkActivityCompleted]);
 
   // Complete chapter when game is won
   useEffect(() => {
@@ -150,149 +127,6 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
   const handleGameChoice = (choice: string) => {
     setUserChoices([...userChoices, choice]);
-  };
-
-  const quizQuestions = [
-    {
-      question:
-        "Selon l'histoire d'Alice, qu'est-ce qu'ALBERT a appris à faire ?",
-      options: [
-        'Réparer des objets cassés',
-        "Retrouver le tournevis d'Alice selon ses habitudes",
-        "Ranger automatiquement l'atelier",
-        "Construire d'autres robots",
-      ],
-      correct: 1,
-      explanation:
-        "ALBERT a appris à comprendre les habitudes d'Alice et à prédire où elle rangeait son tournevis selon le jour de la semaine.",
-    },
-    {
-      question: "Quel test permet de savoir si une machine peut 'penser' ?",
-      options: [
-        'Le test de QI',
-        "Le test d'intelligence émotionnelle",
-        'Le test de Turing',
-        'Le test de performance',
-      ],
-      correct: 2,
-      explanation:
-        "Le test de Turing, proposé en 1950, vérifie si une machine peut avoir une conversation si naturelle qu'on ne peut pas la distinguer d'un humain.",
-    },
-    {
-      question:
-        "Parmi ces éléments de votre quotidien, lequel N'utilise PAS l'IA ?",
-      options: [
-        'La correction automatique du téléphone',
-        'Les suggestions Netflix',
-        'Une calculatrice basique',
-        'Le déverrouillage facial',
-      ],
-      correct: 2,
-      explanation:
-        "Une calculatrice basique suit des règles mathématiques fixes, elle n'apprend pas de patterns comme le fait l'IA.",
-    },
-  ];
-
-  // Fonction pour mélanger un tableau
-  const shuffleArray = <T,>(array: T[]): T[] => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  // État pour stocker les options mélangées et l'index de la bonne réponse
-  const [shuffledOptions, setShuffledOptions] = useState<{
-    options: string[];
-    correctIndex: number;
-  }>({ options: [], correctIndex: 0 });
-
-  // Mélanger les options quand on change de question
-  useEffect(() => {
-    if (quizQuestions[currentQuestion]) {
-      const question = quizQuestions[currentQuestion];
-      const correctAnswer = question.options[question.correct];
-      const shuffled = shuffleArray(question.options);
-      const newCorrectIndex = shuffled.indexOf(correctAnswer);
-
-      setShuffledOptions({
-        options: shuffled,
-        correctIndex: newCorrectIndex,
-      });
-    }
-  }, [currentQuestion]);
-
-  const handleQuizAnswer = (answerIndex: number) => {
-    setSelectedAnswer(answerIndex);
-    setShowQuizFeedback(true);
-
-    if (answerIndex === shuffledOptions.correctIndex) {
-      setQuizScore((prev) => prev + 1);
-    }
-  };
-
-  const handleNextQuestion = async () => {
-    if (currentQuestion < 2) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer(null);
-      setShowQuizFeedback(false);
-    } else {
-      // Quiz terminé
-      setQuizCompleted(true);
-
-      // Calculer le score final avant d'attribuer les points
-      const isLastAnswerCorrect =
-        selectedAnswer === shuffledOptions.correctIndex;
-      const finalScore = isLastAnswerCorrect ? quizScore + 1 : quizScore;
-
-      // Mettre à jour le score final pour l'affichage
-      if (isLastAnswerCorrect) {
-        setQuizScore((prev) => prev + 1);
-      }
-
-      // Attribuer les points selon le score final
-      if (user) {
-        let points = 50;
-        let reason = 'Quiz complété sur "Qu\'est-ce que l\'IA ?"';
-
-        if (finalScore === 3) {
-          points = 200;
-          reason = 'Quiz parfait sur "Qu\'est-ce que l\'IA ?"';
-        } else if (finalScore === 2) {
-          points = 100;
-          reason = 'Quiz réussi sur "Qu\'est-ce que l\'IA ?"';
-        }
-
-        console.log('Quiz completed, adding points:', {
-          finalScore,
-          points,
-          reason,
-        });
-
-        // Petit délai pour s'assurer que le contexte est bien chargé
-        setTimeout(async () => {
-          try {
-            const success = await completeActivity(
-              'what-is-ai-quiz',
-              'quiz',
-              finalScore,
-              points,
-              reason
-            );
-
-            if (success) {
-              console.log('Quiz activity completed successfully');
-            } else {
-              console.log('Quiz already completed before');
-            }
-          } catch (error) {
-            console.error('Error completing quiz activity:', error);
-          }
-        }, 100);
-      }
-    }
   };
 
   return (
@@ -512,7 +346,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1950</div>
               <div className="timeline-content">
-                <h3>Le Test de Turing</h3>
+                <h3>
+                  Le Test de Turing
+                  <span className="timeline-year"> • 1950</span>
+                </h3>
                 <p>
                   Alan Turing imagine un test simple : si une machine peut
                   discuter avec toi sans que tu devines que c'est une machine,
@@ -524,7 +361,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1956</div>
               <div className="timeline-content">
-                <h3>Naissance de l'IA</h3>
+                <h3>
+                  Naissance de l'IA
+                  <span className="timeline-year"> • 1956</span>
+                </h3>
                 <p>
                   Des scientifiques se réunissent à Dartmouth et décident : "On
                   va créer des machines intelligentes !" Spoiler : c'était plus
@@ -536,7 +376,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1966</div>
               <div className="timeline-content">
-                <h3>ELIZA, la première psy robot</h3>
+                <h3>
+                  ELIZA, la première psy robot
+                  <span className="timeline-year"> • 1966</span>
+                </h3>
                 <p>
                   Un programme qui fait semblant d'être psychologue. Les gens
                   lui racontent leur vie ! Preuve que les humains veulent
@@ -548,7 +391,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">1997</div>
               <div className="timeline-content">
-                <h3>Deep Blue bat Kasparov</h3>
+                <h3>
+                  Deep Blue bat Kasparov
+                  <span className="timeline-year"> • 1997</span>
+                </h3>
                 <p>
                   Pour la première fois, un ordinateur bat le champion du monde
                   d'échecs ! Les humains commencent à se dire : "Oups, elles
@@ -560,7 +406,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2011</div>
               <div className="timeline-content">
-                <h3>Siri dit "Bonjour !"</h3>
+                <h3>
+                  Siri dit "Bonjour !"
+                  <span className="timeline-year"> • 2011</span>
+                </h3>
                 <p>
                   Apple lance Siri et soudain, tout le monde parle à son
                   téléphone. "Dis Siri, raconte-moi une blague !" devient la
@@ -572,7 +421,10 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2016</div>
               <div className="timeline-content">
-                <h3>AlphaGo, maître du Go</h3>
+                <h3>
+                  AlphaGo, maître du Go
+                  <span className="timeline-year"> • 2016</span>
+                </h3>
                 <p>
                   L'IA de Google bat le champion du monde de Go, un jeu si
                   complexe qu'on pensait qu'aucune machine ne pourrait y jouer.
@@ -585,7 +437,9 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item">
               <div className="timeline-date">2022</div>
               <div className="timeline-content">
-                <h3>ChatGPT débarque</h3>
+                <h3>
+                  ChatGPT débarque<span className="timeline-year"> • 2022</span>
+                </h3>
                 <p>
                   OpenAI lance ChatGPT et c'est la folie ! Tout le monde lui
                   demande de faire ses devoirs, d'écrire des poèmes, ou juste de
@@ -597,7 +451,9 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
             <div className="timeline-item timeline-item-future">
               <div className="timeline-date">Futur</div>
               <div className="timeline-content">
-                <h3>Et maintenant ?</h3>
+                <h3>
+                  Et maintenant ?<span className="timeline-year"> • Futur</span>
+                </h3>
                 <p>
                   L'IA continue d'évoluer ! Qui sait, peut-être qu'un jour elle
                   nous aidera à explorer l'espace, soigner toutes les maladies,
@@ -747,154 +603,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
 
         <ExplanationSection explanation={explanationContent} />
 
-        <section className="quiz-section">
-          <h3>Testez vos connaissances !</h3>
-          <p className="quiz-intro">
-            Avant de continuer, voyons ce que vous avez retenu de cette page !
-            {quizAlreadyCompleted && (
-              <span className="quiz-already-done">
-                {' '}
-                (Déjà complété - Les points ne seront pas ajoutés à nouveau)
-              </span>
-            )}
-          </p>
-
-          <div className="quiz-container">
-            {!quizCompleted ? (
-              <>
-                <div className="quiz-question">
-                  <h4>Question {currentQuestion + 1}/3</h4>
-                  <p>{quizQuestions[currentQuestion].question}</p>
-
-                  <div className="quiz-options">
-                    {shuffledOptions.options.map((option, index) => (
-                      <button
-                        key={option}
-                        className={`quiz-option ${
-                          selectedAnswer === index ? 'selected' : ''
-                        } ${
-                          showQuizFeedback &&
-                          index === shuffledOptions.correctIndex
-                            ? 'correct'
-                            : ''
-                        } ${
-                          showQuizFeedback &&
-                          selectedAnswer === index &&
-                          index !== shuffledOptions.correctIndex
-                            ? 'incorrect'
-                            : ''
-                        }`}
-                        onClick={() => handleQuizAnswer(index)}
-                        disabled={showQuizFeedback}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-
-                  {showQuizFeedback && (
-                    <div className="quiz-feedback">
-                      <p
-                        className={
-                          selectedAnswer === shuffledOptions.correctIndex
-                            ? 'correct-feedback'
-                            : 'incorrect-feedback'
-                        }
-                      >
-                        {selectedAnswer === shuffledOptions.correctIndex
-                          ? '✅ Bravo ! ' +
-                            quizQuestions[currentQuestion].explanation
-                          : '❌ Pas tout à fait. ' +
-                            quizQuestions[currentQuestion].explanation}
-                      </p>
-                      <button
-                        className="quiz-next-btn"
-                        onClick={handleNextQuestion}
-                      >
-                        {currentQuestion < 2
-                          ? 'Question suivante'
-                          : 'Voir les résultats'}
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                <div className="quiz-progress">
-                  <div className="quiz-progress-bar">
-                    <div
-                      className="quiz-progress-fill"
-                      style={{ width: `${((currentQuestion + 1) / 3) * 100}%` }}
-                    ></div>
-                  </div>
-                  <p className="quiz-score">Score: {quizScore}/3</p>
-                </div>
-              </>
-            ) : (
-              <div className="quiz-results">
-                <h4>🎉 Quiz terminé !</h4>
-                <p className="quiz-final-score">
-                  Vous avez obtenu {quizScore}/3 bonnes réponses !
-                </p>
-                {quizScore === 3 && (
-                  <p className="quiz-perfect">
-                    Parfait ! Vous avez tout compris !
-                    {!quizAlreadyCompleted && ' +200 points bonus 🌟'}
-                  </p>
-                )}
-                {quizScore === 2 && (
-                  <p className="quiz-good">
-                    Très bien ! Vous avez bien suivi !
-                    {!quizAlreadyCompleted && ' +100 points bonus ⭐'}
-                  </p>
-                )}
-                {quizScore === 1 && (
-                  <p className="quiz-encourage">
-                    Pas mal ! N'hésitez pas à relire certaines sections.
-                    {!quizAlreadyCompleted && ' +50 points 💫'}
-                  </p>
-                )}
-                {quizScore === 0 && (
-                  <p className="quiz-encourage">
-                    Ce n'est qu'un début ! Relisez la page et réessayez.
-                    {!quizAlreadyCompleted && ' +50 points 💫'}
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section className="back-home-section">
-          <div className="liquid-portal-container">
-            <div className="liquid-portal" onClick={() => navigate('/home')}>
-              <div className="portal-liquid-bg">
-                <div className="portal-blob portal-blob-1"></div>
-                <div className="portal-blob portal-blob-2"></div>
-                <div className="portal-blob portal-blob-3"></div>
-              </div>
-              <div className="portal-content">
-                <div className="portal-icon">
-                  <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    <polyline points="9 22 9 12 15 12 15 22" />
-                  </svg>
-                </div>
-                <h3 className="portal-title">Retour à l'accueil</h3>
-                <p className="portal-subtitle">Explorez d'autres concepts</p>
-              </div>
-              <div className="portal-glow"></div>
-            </div>
-          </div>
-        </section>
+        <BackHomePortal />
       </div>
     </PageLayout>
   );
