@@ -1,0 +1,139 @@
+@import '../../styles/variables.css';
+
+/* Base liquid background */
+.liquid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Variants */
+.liquid-background--default {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
+}
+
+.liquid-background--blue {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
+}
+
+.liquid-background--orange {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.liquid-background--purple {
+  background: linear-gradient(180deg, #1a0033 0%, #2d1b69 50%, #4a148c 100%);
+}
+
+/* Liquid blobs */
+.liquid-blob {
+  position: absolute;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  animation: blob-float 20s infinite ease-in-out;
+}
+
+.liquid-blob-1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -200px;
+  animation-duration: 25s;
+}
+
+.liquid-blob-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -150px;
+  animation-duration: 30s;
+  animation-delay: -5s;
+}
+
+.liquid-blob-3 {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 35s;
+  animation-delay: -10s;
+}
+
+/* Blob colors by variant */
+.liquid-background--default .liquid-blob-1,
+.liquid-background--blue .liquid-blob-1 {
+  background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+}
+
+.liquid-background--default .liquid-blob-2,
+.liquid-background--blue .liquid-blob-2 {
+  background: radial-gradient(circle at 70% 70%, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+}
+
+.liquid-background--default .liquid-blob-3,
+.liquid-background--blue .liquid-blob-3 {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.2) 0%, transparent 60%);
+}
+
+.liquid-background--orange .liquid-blob-1 {
+  background: radial-gradient(circle at 30% 30%, rgba(79, 172, 254, 0.3) 0%, transparent 70%);
+}
+
+.liquid-background--orange .liquid-blob-2 {
+  background: radial-gradient(circle at 70% 70%, rgba(251, 146, 60, 0.2) 0%, transparent 70%);
+}
+
+.liquid-background--orange .liquid-blob-3 {
+  background: radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.2) 0%, transparent 60%);
+}
+
+.liquid-background--purple .liquid-blob-1 {
+  background: radial-gradient(circle at 30% 30%, rgba(147, 51, 234, 0.3) 0%, transparent 70%);
+}
+
+.liquid-background--purple .liquid-blob-2 {
+  background: radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+}
+
+.liquid-background--purple .liquid-blob-3 {
+  background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.2) 0%, transparent 60%);
+}
+
+/* Animation */
+@keyframes blob-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(100px, -100px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-50px, 100px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(-100px, -50px) rotate(270deg) scale(1.05);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .liquid-blob-1 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .liquid-blob-2 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .liquid-blob-3 {
+    width: 300px;
+    height: 300px;
+  }
+}

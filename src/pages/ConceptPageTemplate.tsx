@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { PageLayout } from '../components/layout/PageLayout';
 import { BackHomePortal } from '../components/ui/BackHomePortal';
+import { LiquidBackground } from '../components/common/LiquidBackground';
 import './ConceptPageTemplate.css';
 
 // Ce composant servira de template pour toutes les pages de concepts futures
@@ -12,11 +13,7 @@ export const ConceptPageTemplate = () => {
   return (
     <PageLayout>
       <div className="concept-page-template">
-        <div className="liquid-background">
-          <div className="liquid-blob liquid-blob-1"></div>
-          <div className="liquid-blob liquid-blob-2"></div>
-          <div className="liquid-blob liquid-blob-3"></div>
-        </div>
+        <LiquidBackground variant="purple" />
 
         <header className="page-hero">
           <div className="hero-content">

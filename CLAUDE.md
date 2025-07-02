@@ -7,6 +7,10 @@ Site web éducatif sur l'IA avec une approche ludique et narrative.
 - **NE JAMAIS exécuter `npm run dev`** - L'utilisateur s'en charge lui-même
 - Toujours attendre que l'utilisateur lance le serveur de développement
 - **Images des concepts** : Les images sont placées dans `/public/images/concepts/` par l'utilisateur
+- **Images fournies** : L'utilisateur fournit les images pour chaque page. Il faut les ajouter :
+  - Dans le hero de la page du concept
+  - Dans la carte du concept sur la page d'accueil (dans `concepts.ts`)
+- **Gamification obligatoire** : Toujours implémenter la gamification pour les pages avec mini-jeux (completeActivity, points bonus, etc.)
 
 ## Stack Technique
 - **Framework**: React 18
@@ -39,10 +43,19 @@ src/
 └── tests/              # Tests unitaires
 
 ### Principes d'Architecture
-1. **Isolation des fonctionnalités**: Chaque feature est autonome
-2. **Composants découplés**: Props typées et interfaces claires
-3. **Tests unitaires obligatoires**: Minimum 80% de couverture
-4. **Lazy loading**: Chargement différé des pages
+1. **Architecture modulaire pour la collaboration**: Favoriser le développement en équipe avec des composants réutilisables
+2. **Composants réutilisables**: Créer des composants universels pour toutes les pages (ex: BackHomePortal, QuizSection, etc.)
+3. **Scalabilité**: Penser la réutilisabilité dès la conception pour accélérer le développement
+4. **Props typées et interfaces claires**: Faciliter l'intégration des composants
+5. **Tests unitaires obligatoires**: Minimum 80% de couverture
+6. **Lazy loading**: Chargement différé des pages
+
+### Exemples de Composants Réutilisables
+- **BackHomePortal**: Bouton de retour à l'accueil avec design liquid
+- **QuizSection**: Quiz modulaire (changement des questions via props)
+- **StorySection**: Section narrative réutilisable
+- **InteractiveSection**: Conteneur pour les jeux interactifs
+- **ExplanationSection**: Section d'explications détaillées
 
 ## Structure d'une Page Type
 
@@ -82,6 +95,15 @@ npm run format       # Formate le code avec Prettier
 - Hooks: camelCase avec préfixe "use" (ex: `useAnimation.ts`)
 - Utilitaires: camelCase (ex: `formatDate.ts`)
 - Types/Interfaces: PascalCase avec préfixe "I" ou suffixe "Type"
+
+### Visibilité du texte
+**IMPORTANT**: Toujours assurer une bonne visibilité du texte sur les fonds sombres :
+- Texte principal : `color: white` ou `color: rgba(255, 255, 255, 0.9)`
+- Texte secondaire : `color: rgba(255, 255, 255, 0.8)`
+- **NE PAS utiliser** : `var(--text-primary)`, `var(--text-muted)`, `var(--text-secondary)` (non définis)
+- Pour les éléments importants, ajouter : `text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3)`
+- Couleurs de succès : `#22c55e` (vert)
+- Couleurs d'avertissement : `#fbbf24` (jaune)
 
 ### Structure d'un Composant
 ```typescript

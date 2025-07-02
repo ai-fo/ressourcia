@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
-import { supabase } from '../services/supabase';
+import { supabase } from '../lib/supabase';
 
 interface UserStats {
   points: number;

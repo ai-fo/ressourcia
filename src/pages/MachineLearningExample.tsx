@@ -5,9 +5,11 @@ import { StorySection } from '../features/storytelling/StorySection';
 import { InteractiveSection } from '../features/interactive/InteractiveSection';
 import { ExplanationSection } from '../features/explanations/ExplanationSection';
 import { BackHomePortal } from '../components/ui/BackHomePortal';
+import { LiquidBackground } from '../components/common/LiquidBackground';
 import { useAuth } from '../contexts/AuthContext';
 import { useGamification } from '../contexts/GamificationContext';
 import { ConceptPageTemplate } from './ConceptPageTemplate';
+import { StoryContent, ExplanationContent } from '../types';
 import './MachineLearningPage.css';
 
 export const MachineLearningExample = () => {
@@ -35,7 +37,7 @@ export const MachineLearningExample = () => {
     checkGameStatus();
   }, [user]);
 
-  const storyContent = {
+  const storyContent: StoryContent = {
     title: "L'histoire de Marie et son chien détective",
     content: `Marie adorait les chiens, mais elle avait un problème : elle n'arrivait jamais à deviner quelle race de chien elle croisait dans la rue. Berger allemand ? Labrador ? Golden retriever ? Impossible de s'y retrouver !
 
@@ -54,7 +56,7 @@ Après des semaines d'entraînement, le miracle se produisit. Marie croisa un ch
     },
   };
 
-  const explanationContent = {
+  const explanationContent: ExplanationContent = {
     title: 'Comment fonctionne le Machine Learning ?',
     sections: [
       {
@@ -137,7 +139,6 @@ Après des semaines d'entraînement, le miracle se produisit. Marie croisa un ch
     }
   };
 
-
   // Si ce n'est pas la page machine-learning-basics, afficher le template
   if (slug !== 'machine-learning-basics') {
     return <ConceptPageTemplate />;
@@ -146,11 +147,7 @@ Après des semaines d'entraînement, le miracle se produisit. Marie croisa un ch
   return (
     <PageLayout>
       <div className="machine-learning-page">
-        <div className="liquid-background">
-          <div className="liquid-blob liquid-blob-1"></div>
-          <div className="liquid-blob liquid-blob-2"></div>
-          <div className="liquid-blob liquid-blob-3"></div>
-        </div>
+        <LiquidBackground variant="orange" />
 
         <header className="page-hero">
           <div className="hero-content">
@@ -297,7 +294,6 @@ Après des semaines d'entraînement, le miracle se produisit. Marie croisa un ch
         </InteractiveSection>
 
         <ExplanationSection explanation={explanationContent} />
-
 
         <BackHomePortal />
       </div>

@@ -4,8 +4,10 @@ import { StorySection } from '../features/storytelling/StorySection';
 import { InteractiveSection } from '../features/interactive/InteractiveSection';
 import { ExplanationSection } from '../features/explanations/ExplanationSection';
 import { BackHomePortal } from '../components/ui/BackHomePortal';
+import { LiquidBackground } from '../components/common/LiquidBackground';
 import { useAuth } from '../contexts/AuthContext';
 import { useGamification } from '../contexts/GamificationContext';
+import { StoryContent, ExplanationContent } from '../types';
 import './WhatIsAIPage.css';
 
 export const WhatIsAIPage = () => {
@@ -57,7 +59,7 @@ export const WhatIsAIPage = () => {
     }
   }, [userChoices, user, hasCompleted, completeChapter, completeActivity]);
 
-  const storyContent = {
+  const storyContent: StoryContent = {
     title: "L'histoire d'Alice et de son assistant magique",
     content: `Alice était une inventrice géniale mais terriblement désorganisée. Ses idées brillantes se perdaient dans des montagnes de papiers, et elle oubliait constamment où elle avait rangé ses outils.
 
@@ -78,7 +80,7 @@ Il avait raison. Pour la première fois, une machine avait vraiment compris.`,
     },
   };
 
-  const explanationContent = {
+  const explanationContent: ExplanationContent = {
     title: "L'IA démystifiée : Comprendre sans le jargon",
     sections: [
       {
@@ -132,11 +134,7 @@ L'IA fait exactement ça, mais en version turbo ! Elle peut analyser des million
   return (
     <PageLayout>
       <div className="what-is-ai-page">
-        <div className="liquid-background">
-          <div className="liquid-blob liquid-blob-1"></div>
-          <div className="liquid-blob liquid-blob-2"></div>
-          <div className="liquid-blob liquid-blob-3"></div>
-        </div>
+        <LiquidBackground variant="blue" />
 
         <header className="page-hero">
           <div className="hero-content">

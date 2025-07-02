@@ -1,3 +1,21 @@
+// Types pour les quiz
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correct: number;
+  explanation: string;
+}
+
+// Types pour les sections narratives
+export interface StoryContent {
+  title: string;
+  content: string;
+  fact?: {
+    title: string;
+    description: string;
+  };
+}
+
 export interface StorySection {
   id: string;
   title: string;
@@ -16,6 +34,18 @@ export interface InteractiveElement {
   title: string;
   description: string;
   config: Record<string, unknown>;
+}
+
+// Types pour les explications
+export interface ExplanationSubSection {
+  subtitle: string;
+  content: string;
+}
+
+export interface ExplanationContent {
+  title: string;
+  sections: ExplanationSubSection[];
+  keyPoints?: string[];
 }
 
 export interface ExplanationSection {
@@ -50,4 +80,19 @@ export interface PageMetadata {
   updatedAt: Date;
   tags: string[];
   difficulty: 'beginner' | 'intermediate' | 'advanced';
+}
+
+// Types pour la gamification
+export interface GameScore {
+  score: number;
+  totalQuestions: number;
+  timeSpent?: number;
+}
+
+export interface UserActivity {
+  activityId: string;
+  activityType: 'quiz' | 'game' | 'reading';
+  score?: number;
+  points: number;
+  completedAt: Date;
 }

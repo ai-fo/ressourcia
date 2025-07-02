@@ -43,4 +43,20 @@
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 2.5rem;
+  
+  /* Couleurs de texte */
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  
+  /* Couleurs d'état */
+  --success: #22c55e;
+  --warning: #fbbf24;
+  --error: #ef4444;
+  --info: #3b82f6;
+  
+  /* Dégradés */
+  --gradient-primary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-orange: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
 }
